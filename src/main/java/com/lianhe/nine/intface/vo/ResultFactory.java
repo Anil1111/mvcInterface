@@ -38,6 +38,7 @@ public class ResultFactory {
         return result;
     }
 
+
     public static RestResult getOKRestResult() {
         RestResult result = new RestResult(Constant.SUCCESS.getIndex(), Constant.SUCCESS.getName());
         simpleLog(result);

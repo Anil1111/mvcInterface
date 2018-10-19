@@ -11,10 +11,10 @@
     <title>Dashboard Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" th:href="@{/my/css/bootstrap.css}">
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" th:href="@{/my/css/dashboard.css}">
 </head>
 
 <body>
@@ -40,7 +40,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="getjson" href="javascript:void(0)">
+                        <a class="nav-link" id="getjson" href="http://localhost/interface/users/page/1">
                             <span data-feather="file"></span>
                             Orders
                         </a>
@@ -107,59 +107,7 @@
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <h2>Section title</h2>
-            <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                    <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>nick_name</th>
-                        <th>username</th>
-                        <th>password</th>
-                        <th>description</th>
-                        <th>creator_name</th>
-                        <th>create_time</th>
-                        <th>update_time</th>
-                        <th>updator_name</th>
-                        <th>disable_flag</th>
-                        <th>remarks</th>
-
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="user:${Result.data}">
-                        <th>[[${user.id}]]</th>
-                        <th>[[${user.nick_name}]]</th>
-                        <th>[[${user.username}]]</th>
-                        <th>[[${user.password}]]</th>
-                        <th>[[${user.description}]]</th>
-                        <th>[[${user.creator_name}]]</th>
-                        <th>[[${user.create_time}]]</th>
-                        <th>[[${user.update_time}]]</th>
-                        <th>[[${user.updator_name}]]</th>
-                        <th>[[${user.disable_flag}]]</th>
-                        <th>[[${user.remarks}]]</th>
-                    </tr>
-                    </tbody>
-                    <!--<tbody>
-                      <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                      </tr>
-                      <tr>
-                        <td>1,015</td>
-                        <td>sodales</td>
-                        <td>ligula</td>
-                        <td>in</td>
-                        <td>libero</td>
-                      </tr>
-                    </tbody>-->
-                </table>
-            </div>
+            <!--<div th:replace="my/in/user_info :: userpage"></div>-->
         </main>
     </div>
 </div>
@@ -167,15 +115,15 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="../bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>
+<script th:src="@{/my/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/my/js/bootstrap.min.js}"></script>
+<!--<script th:src="../bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>-->
 
 <!-- Icons -->
 <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-<script>
-    feather.replace()
-</script>
+<!--<script>-->
+    <!--feather.replace()-->
+<!--</script>-->
 
 <!-- Graphs -->
 <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>-->
@@ -209,10 +157,10 @@
     });
 </script>-->
 </body>
-<script>
-    $("#getjson").click(function () {
-        $.post("http://www.rubi.ink/patent_manage/cms_user/get_list/1/10",
-            function(data){return data;})
-    })
-</script>
+<!--<script>-->
+    <!--// $("#getjson").click(function () {-->
+    <!--//     $.post("",-->
+    <!--//         function(data){return data;})-->
+    <!--// })-->
+<!--</script>-->
 </html>
