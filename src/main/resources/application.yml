@@ -40,6 +40,12 @@ spring:
   jackson:
     date-format: "yyyy-MM-dd HH:mm:ss"
     time-zone: "GMT+8"
+  thymeleaf:
+    prefix: "classpath:/templates/"
+    suffix: ".html"
+    mode: "HTML"
+    encoding: "UTF-8"
+    cache: false
 logging:
   level:
     com.lianhe.nine.intface.intface: info
@@ -54,7 +60,6 @@ logging:
   pattern:
 #    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
     console: "%d{yyyy-MM-dd HH:mm:ss}[%t:%r][%p][%logger]-[%msg%n"
-management:
   endpoints:
     web:
       exposure:
@@ -96,8 +101,6 @@ server:
   port: 80
 spring:
   profiles: nine
-  thymeleaf:
-    cache: false
 rubi:
   exception:
     doLog: true
