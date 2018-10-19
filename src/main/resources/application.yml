@@ -1,0 +1,116 @@
+server:
+  port: 8080
+  servlet:
+      context-path: /interface
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  profiles:
+    active: nine
+  config:
+    location:
+  http:
+    encoding:
+      force: true
+      enabled: true
+      charset: UTF-8
+  datasource:
+    username: rubi
+    password: 2333
+    url: jdbc:mysql://120.78.67.68:3306/interface_db?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+#    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 10
+    #maxIdle:15
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    maxOpenPreparedStatements: 20
+    removeAbandoned: true
+    removeAbandonedTimeout: 1800
+    logAbandoned: true
+  jackson:
+    date-format: "yyyy-MM-dd HH:mm:ss"
+    time-zone: "GMT+8"
+logging:
+  level:
+    com.lianhe.nine.intface.intface: info
+    org.springframework: error
+    org.springframework.boot.web.embedded.tomcat.TomcatWebServer: info
+    org.apache.catalina: error
+    org.apache.shiro.cache: error
+    springfox.documentation.spring.web: error
+  path: C:\Users\Administrator\Desktop\
+  file:
+    max-size: 20MB
+  pattern:
+#    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    console: "%d{yyyy-MM-dd HH:mm:ss}[%t:%r][%p][%logger]-[%msg%n"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  info:
+    git:
+      mode: full
+
+rubi:
+  exception:
+    doLog: false
+#是否打印栈堆
+#  file: project.log
+#======================================================
+
+
+
+---
+debug: false
+server:
+  port: 80
+spring:
+  profiles: prod
+
+---
+debug: true
+
+spring:
+  profiles: dev
+
+---
+debug: true
+
+spring:
+  profiles: test
+---
+debug: false
+server:
+  port: 80
+spring:
+  profiles: nine
+  thymeleaf:
+    cache: false
+rubi:
+  exception:
+    doLog: true
+swagger:
+  enable: true
+management:
+  info:
+    git:
+      mode: full
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    shutdown:
+      enabled: true

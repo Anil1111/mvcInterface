@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="index/js/url.js"></script>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+
+
+    <!--<meta name="keywords"
+          content="Flat Dark Web Login Form Responsive Templates, Iphone Widget Template, Smartphone login forms,Login form, Widget Template, Responsive Templates, a Ipad 404 Templates, Flat Responsive Templates"/>
+    -->
+    <link href="index/css/style.css" rel='stylesheet' type='text/css'/>
+    <!--webfonts-->
+    <!--<link href='index/#css?family=PT+Sans:400,700,400italic,700italic|Oswald:400,300,700' rel='stylesheet'
+          type='text/css'>-->
+    <!--<link href='index/#css?family=Exo+2' rel='stylesheet' type='text/css'>-->
+    <!--//webfonts-->
+
+</head>
+
+<body>
+<script>
+    $(document).ready(function (c) {
+        $('.close').on('click', function (c) {
+            $('.login-form').fadeOut('slow', function (c) {
+                $('.login-form').remove();
+            });
+        });
+    });
+</script>
+<!--SIGN UP-->
+<h1>Login Form</h1>
+<div class="login-form">
+    <div class="close"></div>
+    <div class="head-info">
+        <label class="lbl-1"> </label>
+        <label class="lbl-2"> </label>
+        <label class="lbl-3"> </label>
+    </div>
+    <div class="clear"></div>
+    <div class="avtar">
+        <img src="index/images/avtar.png"/>
+    </div>
+    <form>
+        <!--value="Username" onfocus="this.value = '';"
+               onblur="if (this.value == '') {this.value = 'Username';}"
+            value="Password" onfocus="this.value = '';"
+               onblur="if (this.value == '') {this.value = 'Password';}"
+               -->
+        <input id="username" type="text" name="username" class="text" placeholder="username">
+        <div class="key">
+            <input id="password" type="password" name="password" placeholder="password">
+        </div>
+    </form>
+    <div class="signin">
+        <input type="submit" value="Login">
+    </div>
+</div>
+<div class="copy-rights">
+    <p>Copyright &copy; 2018.Company name All rights reserved.
+</div>
+<script>
+
+    $("input:submit").click(function () {
+        var username = $('input#username').val();
+        var password = $('input#password').val();
+       // var action_l = 'developer_user_login';
+
+        $.ajax({
+            type: 'post',
+            //url: 'develop_user/user.do',
+            url: path + 'login',
+            headers: {
+                Authorization: "123"
+            },
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            data: {
+                username: username,
+                password: password,
+                rememberMe: false,
+                //action: action_l
+            },
+            success: function (data, status, xhr) {
+                if (data.code === 1) {
+                    console.log(data.message);
+
+                    //window.location.href = realPath + '/';
+                    //alert("ok");
+                } else {
+                    console.log(data.message);
+                }
+            },
+            error: function (data, status, error) {
+                console.log(status + "," + data.message);
+                return false;
+            }
+
+        });
+    });
+    $("a.logout").click(function () {
+
+
+        $.ajax({
+            type: 'post',
+            //url: 'develop_user/user.do',
+            url: path + 'logout',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            /* data: {
+                 username:username,
+                 password:password,
+                 rememberMe:false,
+                 action:action_l
+             },*/
+            success: function (data, status, xhr) {
+                if (data.code === 1) {
+                    console.log(data.message);
+                    //window.location.href = realPath + '/';
+                    //alert("ok");
+                } else {
+                    console.log(data.message);
+                }
+            },
+            error: function (data, xhr, status, error) {
+                console.log(xhr.status + "," + data.message);
+                return false;
+            }
+
+        });
+    });
+
+    // $(function () {
+    //     $.ajax({
+    //         type: 'post',
+    //         //url: 'develop_user/user.do',
+    //         url: realPath+'/'+'check',
+    //         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+    //         /* data: {
+    //              username:username,
+    //              password:password,
+    //              rememberMe:false,
+    //              action:action_l
+    //          },*/
+    //         success: function (data) {
+    //             if (data.code == 1) {
+    //                 //window.location.href = realPath + '/';
+    //                 //alert("ok");
+    //                 window.location='/noob/test_fold/main.html';
+    //             } else {
+    //                // alert(data.message);
+    //             }
+    //         },
+    //         error: function (){
+    //             alert("unknown error");
+    //             return false;
+    //         }
+    //
+    //     });
+    // })
+
+</script>
+</body>
+
+</html>
+

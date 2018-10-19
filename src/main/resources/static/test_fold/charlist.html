@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>角色查询显示</title>
+</head>
+<body>
+		<table>
+
+				<tr>
+    		<td>角色名称</td>
+    	
+    	</tr>
+				<c:forEach items="${charlist}" var="s">
+					<tr>
+					<td>${s.name}</td>
+					<td><a href="finditem.do?characterid=${s.id}">背包</a></td>
+					<td><a href="findbuddy.do?characterid=${s.id}">好友</a></td>
+					<td><a href="findbosslog.do?characterid=${s.id}">bosslog</a></td>
+					</tr>
+				</c:forEach>
+	</table>
+</body>
+</html>

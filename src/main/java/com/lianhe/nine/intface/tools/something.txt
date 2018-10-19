@@ -1,0 +1,88 @@
+    "pageNum": 1,               //当前页
+    "pageSize": 10,             //每页的数量
+    "size": 10,                 //当前页的数量
+    "startRow": 1,              //当前页面第一个元素在数据库中的行号
+                                //由于startRow和endRow不常用，这里说个具体的用法
+                                //可以在页面中"显示startRow到endRow 共size条数据"
+    "endRow": 10,               //当前页面最后一个元素在数据库中的行号
+    "total": 26,                //总记录数
+    "pages": 3,                 //总页数
+
+    "list": [...]               //结果集
+
+    "prePage": 0,               //前一页的页码
+    "nextPage": 2,              //下一页的页码
+    "isFirstPage": true,        //是否为第一页
+    "isLastPage": false,        //是否为最后一页
+    "hasPreviousPage": false,   //是否有前一页
+    "hasNextPage": true,        //是否有下一页
+    "navigatePages": 8,         //导航页码数
+    "navigatepageNums": [       //所有导航页号
+            1,
+            2,
+            3
+        ],
+    "navigateFirstPage": 1, //导航条上的第一页
+    "navigateLastPage": 3   //导航条上的最后一页
+
+
+
+
+    /**
+      actuator/auditevents
+      actuator/beans
+      actuator/health
+      actuator/conditions
+      actuator/configprops
+      actuator/env
+      actuator/env/{toMatch}
+      actuator/info
+      actuator/logfile
+      actuator/loggers
+      actuator/loggers/{name}
+      actuator/loggers/{name}
+      actuator/heapdump
+      actuator/threaddump
+      actuator/metrics/{requiredMetricName}
+      actuator/metrics
+      actuator/scheduledtasks
+      actuator/httptrace
+      actuator/mappings
+      actuator
+     *
+     *
+     * management:
+     *   endpoints:
+     *     web:
+     *       exposure:
+     *         include: '*'
+     *
+     **/
+    /**
+     * #======================================================
+     logging:
+     #  level: {info,com.noob.demo}
+     level:
+     com.noob: info
+     org.springframework: ERROR
+     path: C:\Users\Administrator\Desktop\
+     file:
+     max-size: 20MB
+     pattern:
+     #    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+     console: "%d{yyyy-MM-dd HH:mm:ss}[%t:%r][%p][%logger]-[%msg%n"
+     management:
+     endpoints:
+     web:
+     exposure:
+     include: '*'
+     info:
+     git:
+     mode: full
+     rubi:
+     exception:
+     doLog: false
+     #是否打印栈堆
+     #  file: project.log
+     * #======================================================
+     */

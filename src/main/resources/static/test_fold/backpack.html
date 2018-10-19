@@ -1,0 +1,281 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>背包</title>
+
+    <script type="text/javascript">
+        function show(that) {
+            var urla;
+            switch ($(that).attr("class")) {
+                case "equip"    :urla='findEquipDesc.do';break;
+                case "consume"  :urla='findConsumeDesc.do';break;
+                case "etc"      :urla='findEtcDesc.do';break;
+                case "install"  :urla='findInstallDesc.do';break;
+
+            }
+
+            if ($(that).attr("title") == "null") {
+                $.ajax({
+                    type: 'post',
+                    url: urla,
+                    contentType: 'application/json;charset=utf-8',
+                        data: JSON.stringify($(that).attr("name")),
+                    success: function (data) {
+                        $(that).attr("title", data);
+                        return true;
+                    },
+                    error: function (data) {
+                        alert("error");
+                        return false;
+                    }
+
+                });
+            }
+        }
+
+
+    </script>
+</head>
+<body>
+<div class="admin-content-body">
+    <div class="am-cf am-padding am-padding-bottom-0">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">查看&nbsp&nbsp ${requestScope.backpackowner}
+            &nbsp&nbsp的背包</strong>
+            <small></small>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-6">
+            <div class="am-btn-toolbar">
+                <div class="am-btn-group am-btn-group-xs">
+                    <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
+                </div>
+
+                <div class="am-btn-group am-btn-group-xs">
+                    <button onclick="javascript:history.back(-1);" class="am-btn am-btn-default">返回上一页</button>
+                </div>
+
+            </div>
+        </div>
+        <div class="am-u-sm-12 am-u-md-3">
+
+        </div>
+        <!-- <div class="am-u-sm-12 am-u-md-3">
+            <div class="am-input-group am-input-group-sm">
+            <form action="searchcharacter.do" method="post">
+                    <input type="text" class="am-form-field" name="name">
+                 <button class="am-btn am-btn-default" type="submit">搜索</button>
+            </form>
+
+                <span class="am-input-group-btn">
+
+              </span>
+
+            </div>
+        </div> -->
+    </div>
+
+
+    <table width="100%">
+        <tr>
+            <td width="14%" style="float: left;margin: 0px;padding: 0px;">
+                <div style="height:400px;overflow-y:auto">
+                    <table class="am-table am-table-striped am-table-hover table-main" width="256px">
+
+                        <tr>
+                            <th class="table-title">已装备</th>
+                            <th class="table-title">坐标</th>
+
+                        </tr>
+                        <!-- 	<td>位置</td>
+                            <td>数量</td> -->
+
+                        <c:forEach items="${itemlist}" var="s">
+                            <c:if test="${s.inventorytype == -1}">
+                                <tr>
+                                    <td><a href="findequip.do?inventoryitemid=${s.inventoryitemid}" name='${s.itemid}' class="equip" title="null" onMouseOver="show(this)"><img
+                                            src="/resource/0${s.itemid}.info.icon.png"
+                                             width="30px" height="30px"></a>
+                                    </td>
+                                    <td>${s.position}</td>
+                                        <%--	<td>${s.quantity}</td> --%>
+                                </tr>
+                            </c:if>
+                        </c:forEach>
+                    </table>
+                </div>
+            </td>
+
+            <td width="14%" style="float: left;margin: 0px;padding: 0px;">
+                <table class="am-table am-table-striped am-table-hover table-main" width="256px">
+                    <tr>
+                        <th class="table-title">装备</th>
+                        <th class="table-title"></th>
+                        <th class="table-title"></th>
+                        <th class="table-title"></th>
+                    </tr>
+                    <tr>
+                        <c:forEach items="${itemlist}" var="s">
+
+                            <c:if test="${s.inventorytype == 1}">
+                                <td style="float: left;margin: 0px;padding: 0px;" width="25%">
+                                    <a href="findequip.do?inventoryitemid=${s.inventoryitemid}" name='${s.itemid}' class="equip" title="null" onMouseOver="show(this)">
+                                        <img
+                                            src="/resource/0${s.itemid}.info.icon.png"
+                                           width="30px" height="30px"></a>
+
+                                </td>
+                            </c:if>
+
+                        </c:forEach>
+                    </tr>
+
+                </table>
+            </td>
+
+            <td width="18%" style="float: left;margin: 0px;padding: 0px;">
+                <table class="am-table am-table-striped am-table-hover table-main" width="256px">
+
+                    <tr>
+                        <th class="table-title">消耗</th>
+                        <th class="table-title"></th>
+                        <th class="table-title"></th>
+                        <th class="table-title"></th>
+                    </tr>
+
+
+                    <tr>
+                        <c:forEach items="${itemlist}" var="s">
+
+                            <c:if test="${s.inventorytype == 2}">
+                                <td style="float: left;margin: 0px;padding: 0px;" width="25%">
+                                    <a href="#" title="null" name='${s.itemid}' class="consume" onMouseOver="show(this)">
+                                        <img src="/resource/0${s.itemid}.info.icon.png"
+                                              width="30px"
+                                             height="30px">
+                                    </a>
+                                    <sub>${s.quantity}</sub>
+
+                                </td>
+                            </c:if>
+
+                        </c:forEach>
+                    </tr>
+                    <%-- <td>${s.position}</td>
+                    <td>${s.quantity}</td> --%>
+
+
+                </table>
+            </td>
+            <td width="18%" style="float: left;margin: 0px;padding: 0px;">
+                <table class="am-table am-table-striped am-table-hover table-main" width="256px">
+
+                    <tr>
+                        <th class="table-title">设置</th>
+                        <th class="table-title"></th>
+                        <th class="table-title"></th>
+                        <th class="table-title"></th>
+                    </tr>
+
+
+                    <tr>
+                        <c:forEach items="${itemlist}" var="s">
+
+                            <c:if test="${s.inventorytype == 3}">
+                                <td style="float: left;margin: 0px;padding: 0px;" width="25%">
+                                    <a href="#" title="null" name='${s.itemid}' class="install"  onMouseOver="show(this)">
+                                    <img src="/resource/0${s.itemid}.info.icon.png"
+                                        width="30px"
+                                         height="30px">
+                                    </a>
+                                    <sub>${s.quantity}</sub>
+
+                                </td>
+                            </c:if>
+
+                        </c:forEach>
+                    </tr>
+                    <%-- <td>${s.position}</td>
+                    <td>${s.quantity}</td> --%>
+
+
+                </table>
+            </td>
+            <td width="18%" style="float: left;margin: 0px;padding: 0px;">
+                <table class="am-table am-table-striped am-table-hover table-main" width="256px">
+
+                    <tr>
+                        <th class="table-title">其它</th>
+                        <th class="table-title"></th>
+                        <th class="table-title"></th>
+                        <th class="table-title"></th>
+                    </tr>
+
+
+                    <tr>
+                        <c:forEach items="${itemlist}" var="s">
+
+                            <c:if test="${s.inventorytype == 4}">
+                                <td style="float: left;margin: 0px;padding: 0px;" width="25%">
+
+                                    <a href="#" title="null" name='${s.itemid}' class="etc" onMouseOver="show(this)">
+                                        <img src="/resource/0${s.itemid}.info.icon.png" name="etc"
+
+                                             width="30px" height="30px">
+
+                                    </a>
+                                    <sub>${s.quantity}</sub>
+
+                                </td>
+                            </c:if>
+
+                        </c:forEach>
+                    </tr>
+                    <%-- <td>${s.position}</td>
+                    <td>${s.quantity}</td> --%>
+
+
+                </table>
+            </td>
+            <td width="18%" style="float: left;margin: 0px;padding: 0px;">
+                <table class="am-table am-table-striped am-table-hover table-main" width="256px">
+
+                    <tr>
+                        <th class="table-title">现金</th>
+                        <th class="table-title"></th>
+                        <th class="table-title"></th>
+                        <th class="table-title"></th>
+                    </tr>
+
+
+                    <tr>
+                        <c:forEach items="${itemlist}" var="s">
+
+                            <c:if test="${s.inventorytype == 5}">
+                                <td style="float: left;margin: 0px;padding: 0px;" width="25%">
+
+                                    <img src="/resource/0${s.itemid}.info.icon.png"
+                                         width="30px"
+                                         height="30px"><sub>${s.quantity}</sub>
+
+                                </td>
+                            </c:if>
+
+                        </c:forEach>
+                    </tr>
+                    <%-- <td>${s.position}</td>
+                    <td>${s.quantity}</td> --%>
+
+
+                </table>
+            </td>
+
+        </tr>
+
+    </table>
+</div>
+</body>
+</html>

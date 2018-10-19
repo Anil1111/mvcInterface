@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianhe.nine.intface.dao.ProjectMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lianhe.nine.intface.po.Project">
+        <id column="id" property="id" />
+        <result column="project_name" property="project_name" />
+        <result column="description" property="description" />
+        <result column="creator_name" property="creator_name" />
+        <result column="create_time" property="create_time" />
+        <result column="update_time" property="update_time" />
+        <result column="updator_name" property="updator_name" />
+        <result column="delete_flag" property="delete_flag" />
+        <result column="disable_flag" property="disable_flag" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, project_name, description, creator_name, create_time, update_time, updator_name, delete_flag, disable_flag
+    </sql>
+
+</mapper>

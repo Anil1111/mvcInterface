@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../index/js/url.js"></script>
+</head>
+<body>
+<a href="charlist.html">需要权限</a>
+<a href="backpack.html">需要权限</a>
+<a href="javascript:" class="query">post查询</a>
+<a href="javascript:" class="get">get查询</a>
+<a href="javascript:" class="logout">安全退出</a>
+<a href="javascript:" class="actuator">actuator</a>
+<a href="javascript:" class="swagger">swagger</a>
+<br>
+<span></span>
+<!--<form class="form-signin" method="post" action="/Interface/login.do">
+	<h3 class="form-signin-heading">请登录</h3>
+	<label for="inputEmail" class="sr-only">用户名</label>
+	<input type="text" id="inputEmail" class="form-control" placeholder="用户名" name="username" required autofocus>
+	<label for="inputPassword" class="sr-only">密码</label>
+	<input type="password" id="inputPassword" class="form-control" placeholder="密码" name="password" required>
+	<div class="checkbox">
+		<label>
+			<input type="checkbox" name="rememberMe"> 记住我
+		</label>
+	</div>
+	&lt;!&ndash;<p class="bg-warning">${error}</p>&ndash;&gt;
+	<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+</form>-->
+
+</body>
+</html>
+<script>
+
+    $("a.logout").click(function () {
+        //获取当前网址，如： http://localhost:8083/myproj/view/my.jsp
+
+
+
+        $.ajax({
+            type: 'post',
+            //url: 'develop_user/user.do',
+            url: path+'logout',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            /* data: {
+                 username:username,
+                 password:password,
+                 rememberMe:false,
+                 action:action_l
+             },*/
+            success: function (data) {
+                if (data.code === 1) {
+                    //window.location.href = realPath + '/';
+                    //alert("ok");
+                } else {
+                    alert(data.message);
+                }
+            },
+            error: function (data) {
+                alert("unknown error");
+                return false;
+            }
+
+        });
+    });
+
+        $("a.get").click(function () {
+            //获取当前网址，如： http://localhost:8083/myproj/view/my.jsp
+
+
+
+            $.ajax({
+                type: 'get',
+                //url: 'develop_user/user.do',
+                url: path+'develop_user/users',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                /* data: {
+                     username:username,
+                     password:password,
+                     rememberMe:false,sssssss
+                     action:action_l
+                 },*/
+                success: function (data) {
+                    //alert("code:"+data.code+"|"+"message"+data.message);
+                },
+                error: function (data) {
+                    alert("unknown error");
+                    return false;
+                }
+
+            });
+        });
+    $("a.query").click(function () {
+        //获取当前网址，如： http://localhost:8083/myproj/view/my.jsp
+
+
+
+        $.ajax({
+            type: 'post',
+            //url: 'develop_user/user.do',
+            url: path+'develop_user/users',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            /* data: {
+                 username:username,
+                 password:password,
+                 rememberMe:false,
+                 action:action_l
+             },*/
+            success: function (data) {
+                alert("code:"+data.code+"|"+"message"+data.message);
+            },
+            error: function (data) {
+                alert("unknown error");
+                return false;
+            }
+
+        });
+    });
+
+
+    $("a.actuator").click(function () {
+        //获取当前网址，如： http://localhost:8083/myproj/view/my.jsp
+
+        window.location.href=path+'actuator';
+
+        //url: 'develop_user/user.do',
+
+    });
+    $("a.swagger").click(function () {
+        //获取当前网址，如： http://localhost:8083/myproj/view/my.jsp
+
+        window.location.href=path+'swagger-ui.html';
+
+        //url: 'develop_user/user.do',
+
+    });
+</script>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianhe.nine.intface.dao.SysLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lianhe.nine.intface.po.SysLog">
+        <id column="id" property="id" />
+        <result column="ip" property="ip" />
+        <result column="create_time" property="create_time" />
+        <result column="remark" property="remark" />
+        <result column="operate_url" property="operate_url" />
+        <result column="operate_by" property="operate_by" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, ip, create_time, remark, operate_url, operate_by
+    </sql>
+
+</mapper>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+    <!--xmlns:th="http://www.thymleaf.org"作用就是语法提示!-->
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <!--响应式视口元标记-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" type="text/css"
+              href="https://cdnjs.cloudflare.com/ajax/libs/metro/4.2.7/css/metro-all.min.css">
+
+    </head>
+
+
+    <body>
+        <div class="notify-container" style="color: #ea569a">
+
+        </div>
+        <!--<div class="container-fluid bg-darkMagenta fg-white pos-fixed fixed-top z-top">-->
+            <!--<button class="shortcut secondary outline">-->
+                <!--<span class="tag">10</span>-->
+                <!--<span class="caption">Rocket</span>-->
+                <!--<span class="mif-rocket icon"></span>-->
+            <!--</button>-->
+        <!--</div>-->
+        <!--<div class="hero hero-bg text-center neb neb-hero">-->
+        <div class="container-fluid bg-white fg-dark pt-10 pb-20 neb neb-white">
+            <button class="shortcut secondary outline">
+                <span class="tag">10</span>
+                <span class="caption">Rocket</span>
+                <span class="mif-rocket icon"></span>
+            </button>
+            <button class="shortcut secondary outline">
+                <span class="tag">10</span>
+                <span class="caption">Rocket</span>
+                <span class="mif-rocket icon"></span>
+            </button>
+            <button class="shortcut secondary outline">
+                <span class="tag">10</span>
+                <span class="caption">Rocket</span>
+                <span class="mif-rocket icon"></span>
+            </button>
+            <button class="shortcut secondary outline">
+                <span class="tag">10</span>
+                <span class="caption">Rocket</span>
+                <span class="mif-rocket icon"></span>
+            </button>
+        </div>
+        <div th:text="${fuck}"></div>
+        <div th:utext="${fuck}"></div>
+        <h4 th:text="${user}" th:each="user:${suck}"></h4> <!--想当于4个h4-->
+        <h4>
+            <!--想当于4个span 每次循环都会生成当前的标签-->
+            <span th:text="${user}" th:each="user:${suck}"></span>
+        </h4>
+        <h4>
+            <!--想当于4个span 每次循环都会生成当前的标签-->
+            <!-- 中括号*2 相当于th:text   中括号小括号相当于th:utext -->
+            <span th:each="user:${suck}"> [[${user}]]123 </span>
+        </h4>
+        <!-- jQuery first, then Metro UI JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/metro/4.2.7/js/metro.min.js"></script>
+
+    </body>
+</html>
