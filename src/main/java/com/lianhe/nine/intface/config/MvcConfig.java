@@ -42,6 +42,7 @@ public class MvcConfig implements WebMvcConfigurer {
                         "/swagger-ui.html",
                         "/webjars/springfox-swagger-ui/**",
                         "/swagger-ui.html",
+                        "/my/**",
                         "/null",
                         "/null/**"
                 );
