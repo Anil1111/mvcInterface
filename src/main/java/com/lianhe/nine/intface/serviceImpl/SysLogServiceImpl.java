@@ -1,12 +1,18 @@
 package com.lianhe.nine.intface.serviceImpl;
 
-import com.lianhe.nine.intface.po.SysLog;
+import com.lianhe.nine.intface.controller.BaseHandler;
 import com.lianhe.nine.intface.dao.SysLogMapper;
+import com.lianhe.nine.intface.po.SysLog;
 import com.lianhe.nine.intface.service.ISysLogService;
-import com.lianhe.nine.intface.serviceImpl.BaseServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.logging.log4j.util.Strings;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 /**
@@ -18,16 +24,26 @@ import java.util.Date;
  * @since 2018-10-17
  */
 @Service
-public class SysLogServiceImpl extends BaseServiceImpl<SysLogMapper, SysLog> implements ISysLogService {
+public class SysLogServiceImpl extends BaseServiceImpl<SysLogMapper, SysLog> implements ISysLogService,BaseHandler {
+    private static final Logger logger = LoggerFactory.getLogger(SysLogServiceImpl.class);
 
     @Override
-    public int recordOne(String ip, String remark, String operateUrl, String operateBy)throws Exception {
+    public void recordOne(HttpServletRequest request)throws Exception {
+        String OperateBy=  Strings.isNotBlank(request.getHeader("User-Agent"))?
+                request.getHeader("User-Agent"):Strings.EMPTY;
+        String url = Strings.isNotBlank(request.getRequestURI())?request.getRequestURI():Strings.EMPTY;
         SysLog sysLog = new SysLog();
-        sysLog.setIp(ip);
-        sysLog.setOperate_by(operateBy);
-        sysLog.setOperate_url(operateUrl);
-        sysLog.setRemark(remark);
+        sysLog.setIp(getIpAddress(request));
+        sysLog.setOperate_by(OperateBy);//
+        sysLog.setOperate_url(URLDecoder.decode(url,StandardCharsets.UTF_8.name()));//
+        sysLog.setRemark(Strings.EMPTY);
         sysLog.setCreate_time(new Date());
-        return baseMapper.insert(sysLog);
+        baseMapper.insert(sysLog);
+    }
+
+    @Override
+    public void logOne(HttpServletRequest request) throws Exception {
+        logger.info("uri    : " + URLDecoder.decode(request.getRequestURI(),StandardCharsets.UTF_8.name()));
+        logger.info("params : "+this.getRequestMapSingle(request));
     }
 }

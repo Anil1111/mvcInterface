@@ -1,7 +1,10 @@
 package com.lianhe.nine.intface.service;
 
 import com.lianhe.nine.intface.po.SysLog;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -14,5 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = Exception.class)
 public interface ISysLogService extends IBaseService<SysLog> {
 
-    int recordOne(String ip, String remark, String operateUrl, String operateBy) throws Exception;
+    void recordOne(HttpServletRequest request) throws Exception;
+
+
+
+    void logOne(HttpServletRequest request)throws Exception;
 }
