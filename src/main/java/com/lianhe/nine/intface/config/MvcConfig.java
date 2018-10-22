@@ -23,7 +23,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class MvcConfig implements WebMvcConfigurer {
     // private Logger logger =
     private static final Logger logger = LoggerFactory.getLogger(MvcConfig.class);
-    
 
 
     @Override
@@ -33,7 +32,7 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(getRequestInterceptor())
                 .addPathPatterns("/**","/")
                 .excludePathPatterns(
-                        "/index/**","/index.html","/test_fold/**",//资源请求交给数据库记录
+                        "/index/**","/test_fold/**",//资源请求交给数据库记录/index.html"
                         "/druid/",
                         "/druid/**",
                         "/swagger-resources/**",
@@ -41,14 +40,24 @@ public class MvcConfig implements WebMvcConfigurer {
                         "/error",
                         "/swagger-ui.html",
                         "/webjars/springfox-swagger-ui/**",
-                        "/swagger-ui.html",
+                        "/my/**",
                         "/null",
                         "/null/**"
                 );
 
-        registry.addInterceptor(getSystemLogInterceptor()).addPathPatterns("/**").addPathPatterns("/").excludePathPatterns("/index/**");
+        registry.addInterceptor(getSystemLogInterceptor())
+                .addPathPatterns("/**","/")
+                .excludePathPatterns("/index/**");
     }
-
+    /**
+     * 因为本身体注入了service,所以这么注入进容器
+     * @return SystemLogInterceptor
+     */
+    @Bean
+    public SystemLogInterceptor getSystemLogInterceptor() {
+        logger.info("----------------ConfigInit:HandlerInterceptor");
+        return new SystemLogInterceptor();
+    }
     /**
      * 因为本身体注入了service,所以这么注入进容器
      * @return RequestInterceptor
@@ -72,15 +81,7 @@ public class MvcConfig implements WebMvcConfigurer {
                 .allowCredentials(true);
     }
 
-    /**
-     * 因为本身体注入了service,所以这么注入进容器
-     * @return SystemLogInterceptor
-     */
-    @Bean
-    public HandlerInterceptor getSystemLogInterceptor() {
-        logger.info("----------------ConfigInit:HandlerInterceptor");
-        return new SystemLogInterceptor();
-    }
+
 
 
     //    @Bean

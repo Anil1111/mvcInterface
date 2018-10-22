@@ -2,11 +2,10 @@ package com.lianhe.nine.intface.filter;
 
 import com.lianhe.nine.intface.constant.Constant;
 import com.lianhe.nine.intface.controller.BaseHandler;
-import com.lianhe.nine.intface.interceptpr.IAsync;
+import com.lianhe.nine.intface.service.ISysLogService;
 import org.apache.shiro.web.filter.authz.RolesAuthorizationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -24,11 +23,29 @@ import java.io.IOException;
 public class RubiRoleFilter extends RolesAuthorizationFilter implements BaseHandler {
     private static final Logger logger = LoggerFactory.getLogger(RubiRoleFilter.class);
 
-    @Autowired
-    private IAsync logAsync;
 
-    public RubiRoleFilter(IAsync logAsync) {
-        this.logAsync=logAsync;
+    private ISysLogService sysLogService;
+
+    public RubiRoleFilter(ISysLogService sysLogService) {
+        this.sysLogService=sysLogService;
+    }
+
+    @Override
+    public boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws IOException {
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse resp = (HttpServletResponse) response;
+        if(req.getRequestURI().contains("actuator")){
+            /**
+             * 因为 actuator  以及子地址都不会被拦截器拦截， 所以专门用过滤器打印 改日志
+             */
+            try {
+                sysLogService.recordOne(req);
+                sysLogService.logOne(req);
+            } catch (Exception e) {
+                logger.warn("filter failed record mysql :{}",e.getClass().getName());
+            }
+        }
+        return super.isAccessAllowed(request, response, mappedValue);
     }
 
     @Override
@@ -38,17 +55,7 @@ public class RubiRoleFilter extends RolesAuthorizationFilter implements BaseHand
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
-        if(req.getRequestURI().contains("actuator")){
-            /**
-             * 因为 actuator  以及子地址都不会被拦截器拦截， 所以专门用过滤器打印 改日志
-             */
-            try {
-                logAsync.recordOne(req);
-                logAsync.logOne(req);
-            } catch (Exception e) {
-                logger.warn("filter failed record mysql :{}",e.getClass().getName());
-            }
-        }
+
         if (req.getMethod().equals(RequestMethod.OPTIONS.name())) {
             resp.setStatus(HttpStatus.OK.value());
             return true;

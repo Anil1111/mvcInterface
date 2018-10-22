@@ -8,6 +8,8 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+
+//@ImportResource(locations = {"classpath:beans.mapper"})适用于 spring配置文件
 /**
  * file: ./config/
  * file: ./
@@ -18,9 +20,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @EnableAsync
 @EnableCaching//@Cacheable，@CachePut
-@SpringBootApplication
 @EnableScheduling
-
+@SpringBootApplication
 public class RubiApplication {
     private static Logger logger = LoggerFactory.getLogger(RubiApplication.class);
     public static void main(String[] args) {
@@ -30,4 +31,6 @@ public class RubiApplication {
     }
 
 }
-//@ImportResource(locations = {"classpath:beans.mapper"})适用于 spring配置文件
+
+
+

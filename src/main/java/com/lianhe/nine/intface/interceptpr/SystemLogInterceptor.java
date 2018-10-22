@@ -2,6 +2,7 @@ package com.lianhe.nine.intface.interceptpr;
 
 
 import com.lianhe.nine.intface.controller.BaseHandler;
+import com.lianhe.nine.intface.service.ISysLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * 打印日志到数据库
  * @author : Rubi
  * @version : 2018-10-10 15:45
  */
@@ -20,11 +22,11 @@ public class SystemLogInterceptor implements HandlerInterceptor,BaseHandler {
     private static final Logger logger = LoggerFactory.getLogger(SystemLogInterceptor.class);
 
     @Autowired
-    private IAsync logAsync;
+    private ISysLogService sysLogService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        logAsync.recordOne(request);
+        sysLogService.recordOne(request);
         return true;
     }
 

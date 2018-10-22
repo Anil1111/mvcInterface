@@ -38,7 +38,7 @@ public class UserController {
 
     @GetMapping(value = "/")
     public String index() throws Exception {
-        return "my/dashboard";
+        return "my/layout/layout";
     }
     @GetMapping(value = "/user/{user_id}")
     public String get(@PathVariable int user_id, Model model) throws Exception {
@@ -105,7 +105,8 @@ public class UserController {
         model.addAttribute("Result",result);
 
        // return "my/in/user_info :: userpage";
-            return "my/in/user_info :: userpage";
+          //  return "my/userlist";
+        return "my/userlist";
     }
 
 

@@ -2,6 +2,7 @@ package com.lianhe.nine.intface.interceptpr;
 
 
 import com.lianhe.nine.intface.controller.BaseHandler;
+import com.lianhe.nine.intface.service.ISysLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,18 +11,23 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 
 
+/**
+ * 打印日志到控制台,文件
+ * @author : Rubi
+ * @version : 2018-10-10 15:59
+ */
 public class RequestInterceptor implements HandlerInterceptor,BaseHandler {
     private static final Logger logger = LoggerFactory.getLogger(RequestInterceptor.class);
     @Autowired
-    private IAsync logAsync;
+    private ISysLogService sysLogService;
 
     @Override//handler执行前,身份认证，身份授权
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        //logger.info("ip " +request.getRemoteAddr());
-        //String action = request.getParameter("action")!=null? request.getParameter("action"):"";
-        logAsync.logOne(request);
+        sysLogService.logOne(request);
         return true;
     }
 
