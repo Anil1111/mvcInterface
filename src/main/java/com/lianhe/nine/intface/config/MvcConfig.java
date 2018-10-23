@@ -9,30 +9,30 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
+ * 声明是 配置类 ，替代spring配置文件@EnableWebMvc全面接管spring mvc
  * @author : Rubi
  * @version : 2018-10-09 10:43
  */
 
-@Configuration//声明是 配置类 ，替代spring配置文件//@EnableWebMvc//全面接管spring mvc
+@Configuration
 public class MvcConfig implements WebMvcConfigurer {
-    // private Logger logger =
     private static final Logger logger = LoggerFactory.getLogger(MvcConfig.class);
+
 
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
-
+        //资源请求交给数据库记录/index.html"
         registry.addInterceptor(getRequestInterceptor())
                 .addPathPatterns("/**","/")
                 .excludePathPatterns(
-                        "/index/**","/test_fold/**",//资源请求交给数据库记录/index.html"
+                        "/index/**","/test_fold/**",
                         "/druid/",
                         "/druid/**",
                         "/swagger-resources/**",
@@ -55,7 +55,7 @@ public class MvcConfig implements WebMvcConfigurer {
      */
     @Bean
     public SystemLogInterceptor getSystemLogInterceptor() {
-        logger.info("----------------ConfigInit:HandlerInterceptor");
+        logger.info("----------------ConfigInit:SystemLogInterceptor");
         return new SystemLogInterceptor();
     }
     /**
@@ -75,6 +75,7 @@ public class MvcConfig implements WebMvcConfigurer {
     }
     @Override
     public void addCorsMappings(CorsRegistry registry) {
+        logger.info("----------------ConfigInit:CorsMappings");
         registry.addMapping("/**")
                 .allowedOrigins(CorsConfiguration.ALL)
                 .allowedMethods(CorsConfiguration.ALL)

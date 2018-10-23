@@ -2,9 +2,12 @@ package com.lianhe.nine.intface.interceptpr;
 
 
 import com.lianhe.nine.intface.controller.BaseHandler;
+import com.lianhe.nine.intface.po.SysLog;
 import com.lianhe.nine.intface.service.ISysLogService;
+import com.lianhe.nine.intface.tasks.IAsyncTaskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,18 +28,47 @@ public class RequestInterceptor implements HandlerInterceptor,BaseHandler {
     @Autowired
     private ISysLogService sysLogService;
 
-    @Override//handler执行前,身份认证，身份授权
+
+    /**
+     * handler执行前,身份认证，身份授权
+     * @param request
+     * @param response
+     * @param handler
+     * @return
+     * @throws Exception
+     */
+    @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        sysLogService.logOne(request);
+
+        sysLogService.logOne(
+                URLDecoder.decode(request.getRequestURI(), StandardCharsets.UTF_8.name())
+                ,this.getRequestMapSingle(request));
         return true;
     }
 
-    @Override//进入了handler,返回ModelAndView前，将公用数据传到视图  只要有一个拦截器的pre不放行 ，那么所有拦截器都不执行post
+    /**
+     * 进入了handler,返回ModelAndView前，将公用数据传到视图  只要有一个拦截器的pre不放行 ，那么所有拦截器都不执行post
+     * @param request
+     * @param response
+     * @param handler
+     * @param modelAndView
+     * @throws Exception
+     */
+    @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
                            ModelAndView modelAndView) throws Exception {
+
     }
 
-    @Override//handler完成后,异常处理，日志(日志拦截器在xml，配置要放前面,
+    /**
+     * handler完成后,异常处理，日志(日志拦截器在xml，配置要放前面,
+     * @param request
+     * @param response
+     * @param handler
+     * @param ex
+     * @throws Exception
+     */
+    @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
 
     }

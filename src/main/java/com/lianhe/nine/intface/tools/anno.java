@@ -80,7 +80,7 @@ Spring 常用配置:
     @EnableCaching开启注解是缓存的支持.
     @EnableDiscoveryClient 让服务发现服务器,使用服务器.Spring cloud 实现服务发现
     @EnableEurekaServer 注册服务器 spring cloud 实现服务注册@
-    @EnableScheduling 让spring可以进行任务调度,功能类似于spring.xml文件中的命名空间<task:*>
+    @EnableScheduling 让spring可以进行任务调度,功能类似于spring.xml文件中的命名空间<tasks:*>
     @EnableCaching 开启Cache缓存支持;
 
 SpringMVC 常用注解:

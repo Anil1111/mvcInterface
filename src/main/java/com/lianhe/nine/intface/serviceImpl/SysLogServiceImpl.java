@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * <p>
@@ -24,26 +25,33 @@ import java.util.Date;
  * @since 2018-10-17
  */
 @Service
-public class SysLogServiceImpl extends BaseServiceImpl<SysLogMapper, SysLog> implements ISysLogService,BaseHandler {
+public class SysLogServiceImpl extends BaseServiceImpl<SysLogMapper, SysLog> implements ISysLogService, BaseHandler {
     private static final Logger logger = LoggerFactory.getLogger(SysLogServiceImpl.class);
 
     @Override
-    public void recordOne(HttpServletRequest request)throws Exception {
-        String OperateBy=  Strings.isNotBlank(request.getHeader("User-Agent"))?
-                request.getHeader("User-Agent"):Strings.EMPTY;
-        String url = Strings.isNotBlank(request.getRequestURI())?request.getRequestURI():Strings.EMPTY;
+    public void recordOne(String ip, String operateBy, String operateUrl, String remark, Date createTime) throws Exception {
+        for (int i = 0; i < 10; i++) {
+            Thread.sleep(1000);
+            logger.info("{}:{}",1,Thread.currentThread().getName());
+
+        }
         SysLog sysLog = new SysLog();
-        sysLog.setIp(getIpAddress(request));
-        sysLog.setOperate_by(OperateBy);//
-        sysLog.setOperate_url(URLDecoder.decode(url,StandardCharsets.UTF_8.name()));//
-        sysLog.setRemark(Strings.EMPTY);
-        sysLog.setCreate_time(new Date());
+        sysLog.setIp(ip);
+        sysLog.setOperate_by(operateBy);
+        sysLog.setOperate_url(operateUrl);
+        sysLog.setRemark(remark);
+        sysLog.setCreate_time(createTime);
         baseMapper.insert(sysLog);
     }
 
     @Override
-    public void logOne(HttpServletRequest request) throws Exception {
-        logger.info("uri    : " + URLDecoder.decode(request.getRequestURI(),StandardCharsets.UTF_8.name()));
-        logger.info("params : "+this.getRequestMapSingle(request));
+    public void logOne(String url, Map params) throws Exception {
+        for (int i = 0; i < 10; i++) {
+            Thread.sleep(1000);
+            logger.info("{}:{}",2,Thread.currentThread().getName());
+
+        }
+        logger.info("uri    : " + url);
+        logger.info("params : " + params);
     }
 }

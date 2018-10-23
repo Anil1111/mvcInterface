@@ -12,4 +12,5 @@ public class URLConstant {
     //http://ip.ws.126.net/ipquery?ip=117.148.92.108  var lo="浙江省", lc="湖州市"; var localAddress={city:"湖州市", province:"浙江省"}
     public static final String IP_126NET="http://ip.ws.126.net/ipquery";
     //http://ip-api.com/json/117.148.92.108?lang=zh-CN 就是city是拼音不太好
+    public static final String ACTUATOR="actuator";
 }

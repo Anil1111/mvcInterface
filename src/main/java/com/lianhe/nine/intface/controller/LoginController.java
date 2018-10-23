@@ -23,7 +23,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+/**
+ * @author : Rubi
+ * @version : 2018-10-10 10:29
+ */
 @Api(value = "/", tags = {"登入登出"})
 @RestController
 public class LoginController implements BaseHandler {

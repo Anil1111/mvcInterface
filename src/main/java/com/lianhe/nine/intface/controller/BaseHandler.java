@@ -56,7 +56,7 @@ public interface BaseHandler {
      */
     default String getIpAddress(HttpServletRequest request) {
         String ip = request.getRemoteAddr() == null ? "" : request.getRemoteAddr();
-        return ip.equals("0:0:0:0:0:0:0:1") ? "127.0.0.1" : ip;
+        return "0:0:0:0:0:0:0:1".equals(ip) ? "127.0.0.1" : ip;
     }
 
     /**

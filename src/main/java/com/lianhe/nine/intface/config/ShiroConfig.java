@@ -8,7 +8,6 @@ import com.lianhe.nine.intface.filter.RubiPermissionFilter;
 import com.lianhe.nine.intface.filter.RubiRoleFilter;
 import com.lianhe.nine.intface.filter.RubiUserFilter;
 import com.lianhe.nine.intface.po.UrlFilter;
-import com.lianhe.nine.intface.service.ISysLogService;
 import com.lianhe.nine.intface.service.IUrlFilterService;
 import com.lianhe.nine.intface.shiro.MyRealm;
 import com.lianhe.nine.intface.shiro.RetryLimitHashedCredentialsMatcher;
@@ -33,12 +32,9 @@ import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -60,7 +56,7 @@ public class ShiroConfig {
 
     @Bean
     public PreServiceConfig getService(){
-        return  new PreServiceConfig();
+        return new PreServiceConfig();
     }
 
    /* @Autowired
@@ -245,8 +241,8 @@ public class ShiroConfig {
     @Bean(name = "shiroFilter")
     public ShiroFilterFactoryBean shiroFilter(
             SecurityManager securityManager,
-            IUrlFilterService shiroService,
-            ISysLogService sysLogService) throws Exception {
+            IUrlFilterService shiroService
+    ) throws Exception {
 
         logger.info("----------------ConfigInit:shiroFilter");
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
@@ -254,7 +250,7 @@ public class ShiroConfig {
         Map<String, Filter> filterMap = Maps.newHashMap();
         filterMap.put("user", new RubiUserFilter());
         filterMap.put("authc", new LoginFilter());
-        filterMap.put("roles", new RubiRoleFilter(sysLogService));
+        filterMap.put("roles", new RubiRoleFilter());
         filterMap.put("perms", new RubiPermissionFilter());
         List<UrlFilter> list = shiroService.getAllUrlFilter();
         Map<String, String> urlMap = Maps.newLinkedHashMap();
@@ -264,10 +260,9 @@ public class ShiroConfig {
         }
 
 
-        shiroFilterFactoryBean.setLoginUrl("/login");///login
+        shiroFilterFactoryBean.setLoginUrl("/login");
         //shiroFilterFactoryBean.setUnauthorizedUrl("/");  //权限不够会弹到这li
         shiroFilterFactoryBean.setSuccessUrl(URLConstant.SUCCESS_URL);
-//        shiroFilterFactoryBean.setUnauthorizedUrl("/");
         shiroFilterFactoryBean.setFilters(filterMap);
         shiroFilterFactoryBean.setFilterChainDefinitionMap(urlMap);
         return shiroFilterFactoryBean;

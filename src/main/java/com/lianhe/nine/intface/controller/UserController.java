@@ -103,9 +103,6 @@ public class UserController {
         PageInfo<User> pageInfo = userService.getPageByHelper(page_index, Constant.PAGE_SIZE.getIndex(), new QueryWrapper<>());
         result = ResultFactory.getOKRestResult(pageInfo);
         model.addAttribute("Result",result);
-
-       // return "my/in/user_info :: userpage";
-          //  return "my/userlist";
         return "my/userlist";
     }
 

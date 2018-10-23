@@ -3,15 +3,20 @@ package com.lianhe.nine.intface.interceptpr;
 
 import com.lianhe.nine.intface.controller.BaseHandler;
 import com.lianhe.nine.intface.service.ISysLogService;
+import com.lianhe.nine.intface.tasks.IAsyncTaskService;
+import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
 
 /**
  * 打印日志到数据库
@@ -24,9 +29,13 @@ public class SystemLogInterceptor implements HandlerInterceptor,BaseHandler {
     @Autowired
     private ISysLogService sysLogService;
 
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        sysLogService.recordOne(request);
+        sysLogService.recordOne(
+                getIpAddress(request),request.getHeader("User-Agent"),
+                URLDecoder.decode(request.getRequestURI(), StandardCharsets.UTF_8.name()),Strings.EMPTY,new Date());
+
         return true;
     }
 
@@ -37,6 +46,5 @@ public class SystemLogInterceptor implements HandlerInterceptor,BaseHandler {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-
     }
 }

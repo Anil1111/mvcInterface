@@ -3,6 +3,7 @@ package com.lianhe.nine.intface.controller;
 import com.google.common.collect.Maps;
 import com.lianhe.nine.intface.constant.URLConstant;
 import com.lianhe.nine.intface.service.IUserService;
+import com.lianhe.nine.intface.tasks.IAsyncTaskService;
 import com.lianhe.nine.intface.vo.Result;
 import com.lianhe.nine.intface.vo.ResultFactory;
 import io.swagger.annotations.Api;
@@ -38,6 +39,9 @@ public class WeatherController implements BaseHandler {
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private IAsyncTaskService asyncTaskService;
+
     @ApiOperation(httpMethod = "POST", value = "根据城市名查询天气信息", tags = {"测试用接口"})
     @ApiImplicitParam(name = "city", value = "城市", dataType = "String", paramType = "query", example = "湖州")
     @PostMapping("/weather")
@@ -58,5 +62,9 @@ public class WeatherController implements BaseHandler {
         return ResultFactory.getOKRestResult(getSimple(URLConstant.TAOBAO_IP,map,restTemplate));
     }
 
-
+    @GetMapping("/test")
+    public Result test() throws Exception {
+        System.out.println("controller ...........................");
+        return  null;
+    }
 }
