@@ -61,5 +61,5 @@ public class WeatherController implements BaseHandler {
         map.put("ip", ip);
         return ResultFactory.getOKRestResult(getSimple(URLConstant.TAOBAO_IP,map,restTemplate));
     }
-    
+
 }

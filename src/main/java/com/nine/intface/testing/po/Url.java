@@ -25,7 +25,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("test_url")
-@ApiModel(value="Url对象", description="")
+@ApiModel(value="Url对象", description="url 表")
 public class Url extends Model<Url> {
 
     private static final long serialVersionUID = 1L;
