@@ -19,7 +19,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author Rubi
- * @since 2018-10-17
+ * @since 2018-10-23
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -34,7 +34,7 @@ public class User extends Model<User> {
     private Integer id;
 
     @ApiModelProperty(value = "昵称")
-    private String nick_name;
+    private String nickName;
 
     @ApiModelProperty(value = "用户名")
     private String username;
@@ -46,23 +46,23 @@ public class User extends Model<User> {
     private String description;
 
     @ApiModelProperty(value = "创建人")
-    private String creator_name;
+    private String creatorName;
 
     @ApiModelProperty(value = "创建时间")
-    private Date create_time;
+    private Date createTime;
 
     @ApiModelProperty(value = "更新时间")
-    private Date update_time;
+    private Date updateTime;
 
     @ApiModelProperty(value = "更新人")
-    private String updator_name;
+    private String updatorName;
 
     @ApiModelProperty(value = "逻辑删除")
     @TableLogic
-    private Integer delete_flag;
+    private Integer deleteFlag;
 
     @ApiModelProperty(value = "禁用启用")
-    private Integer disable_flag;
+    private Integer disableFlag;
 
 
     @Override

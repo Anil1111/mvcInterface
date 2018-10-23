@@ -7,14 +7,14 @@
         <id column="id" property="id" />
         <result column="uri" property="uri" />
         <result column="filter" property="filter" />
-        <result column="parent_sort" property="parent_sort" />
-        <result column="sub_sort" property="sub_sort" />
+        <result column="parent_sort" property="parentSort" />
+        <result column="sub_sort" property="subSort" />
         <result column="remark" property="remark" />
-        <result column="create_time" property="create_time" />
-        <result column="update_time" property="update_time" />
-        <result column="creator_name" property="creator_name" />
-        <result column="updator_name" property="updator_name" />
-        <result column="disable_flag" property="disable_flag" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="creator_name" property="creatorName" />
+        <result column="updator_name" property="updatorName" />
+        <result column="disable_flag" property="disableFlag" />
     </resultMap>
 
     <!-- 通用查询结果列 -->

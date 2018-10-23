@@ -5,7 +5,7 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.lianhe.nine.intface.po.Permission">
         <id column="id" property="id" />
-        <result column="permission_name" property="permission_name" />
+        <result column="permission_name" property="permissionName" />
         <result column="describtion" property="describtion" />
     </resultMap>
 

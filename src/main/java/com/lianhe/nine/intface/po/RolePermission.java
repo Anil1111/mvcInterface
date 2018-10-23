@@ -17,7 +17,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author Rubi
- * @since 2018-10-17
+ * @since 2018-10-23
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -32,10 +32,10 @@ public class RolePermission extends Model<RolePermission> {
     private Integer id;
 
     @ApiModelProperty(value = "角色id")
-    private Integer role_id;
+    private Integer roleId;
 
     @ApiModelProperty(value = "权限id")
-    private Integer permission_id;
+    private Integer permissionId;
 
 
     @Override

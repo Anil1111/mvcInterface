@@ -1,6 +1,5 @@
 package com.lianhe.nine.intface.po;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 
@@ -20,16 +19,14 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author Rubi
- * @since 2018-10-17
+ * @since 2018-10-23
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("url_filter")
 @ApiModel(value="UrlFilter对象", description="shiro过滤链表")
-public class UrlFilter extends Model<UrlFilter> implements Comparable<UrlFilter>{
-    /* implements Comparator<UrlFilter> */
-    /*disable_flag*/
+public class UrlFilter extends Model<UrlFilter> implements Comparable<UrlFilter> {
+
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
@@ -42,28 +39,28 @@ public class UrlFilter extends Model<UrlFilter> implements Comparable<UrlFilter>
     private String filter;
 
     @ApiModelProperty(value = "父排序id")
-    private Integer parent_sort;
+    private Integer parentSort;
 
     @ApiModelProperty(value = "子排序id")
-    private Integer sub_sort;
+    private Integer subSort;
 
     @ApiModelProperty(value = "备注")
     private String remark;
 
     @ApiModelProperty(value = "创建时间")
-    private Date create_time;
+    private Date createTime;
 
     @ApiModelProperty(value = "更新时间")
-    private Date update_time;
+    private Date updateTime;
 
     @ApiModelProperty(value = "创建人")
-    private String creator_name;
+    private String creatorName;
 
     @ApiModelProperty(value = "更新人")
-    private String updator_name;
+    private String updatorName;
 
     @ApiModelProperty(value = "禁用启用")
-    private Integer disable_flag;
+    private Integer disableFlag;
 
 
     @Override
@@ -73,10 +70,14 @@ public class UrlFilter extends Model<UrlFilter> implements Comparable<UrlFilter>
 
     @Override
     public int compareTo(UrlFilter o) {
-        int superResult = parent_sort.compareTo(o.getParent_sort());
-        int subResult = sub_sort.compareTo(o.getSub_sort());
+        int superResult = parentSort.compareTo(o.getParentSort());
+        int subResult = subSort.compareTo(o.getSubSort());
         return superResult != 0 ? superResult : subResult;
     }
 
 
 }
+
+
+
+

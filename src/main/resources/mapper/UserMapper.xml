@@ -5,16 +5,16 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.lianhe.nine.intface.po.User">
         <id column="id" property="id" />
-        <result column="nick_name" property="nick_name" />
+        <result column="nick_name" property="nickName" />
         <result column="username" property="username" />
         <result column="password" property="password" />
         <result column="description" property="description" />
-        <result column="creator_name" property="creator_name" />
-        <result column="create_time" property="create_time" />
-        <result column="update_time" property="update_time" />
-        <result column="updator_name" property="updator_name" />
-        <result column="delete_flag" property="delete_flag" />
-        <result column="disable_flag" property="disable_flag" />
+        <result column="creator_name" property="creatorName" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="updator_name" property="updatorName" />
+        <result column="delete_flag" property="deleteFlag" />
+        <result column="disable_flag" property="disableFlag" />
     </resultMap>
 
     <!-- 通用查询结果列 -->

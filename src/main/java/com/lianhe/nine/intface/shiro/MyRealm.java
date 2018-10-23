@@ -183,8 +183,8 @@ public class MyRealm extends AuthorizingRealm {
         Set<Role> roles = userService.getRoles(username);
         if (roles != null && !roles.isEmpty()) {
             for (Role role : roles) {
-                if (role != null && role.getRole_name() != "") {
-                    info.addRole(role.getRole_name());
+                if (role != null && role.getRoleName() != "") {
+                    info.addRole(role.getRoleName());
                 }
             }
         }
@@ -195,8 +195,8 @@ public class MyRealm extends AuthorizingRealm {
         Set<Permission> permissions = userService.getPermissions(username);
         if (permissions != null && !permissions.isEmpty()) {
             for (Permission permission : permissions) {
-                if (permission != null && permission.getPermission_name() != "") {
-                    info.addStringPermission(permission.getPermission_name());//添加权限
+                if (permission != null && permission.getPermissionName() != "") {
+                    info.addStringPermission(permission.getPermissionName());//添加权限
                 }
             }
         }

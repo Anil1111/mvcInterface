@@ -17,7 +17,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author Rubi
- * @since 2018-10-17
+ * @since 2018-10-23
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -32,7 +32,7 @@ public class Role extends Model<Role> {
     private Integer id;
 
     @ApiModelProperty(value = "角色名称")
-    private String role_name;
+    private String roleName;
 
     @ApiModelProperty(value = "描述")
     private String describtion;

@@ -48,7 +48,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
             if (!CollectionUtils.isEmpty(userRoles)) {
                 List<Integer> roleIds = Lists.newArrayList();
                 for (UserRole userRole : userRoles) {
-                    roleIds.add(userRole.getRole_id());
+                    roleIds.add(userRole.getRoleId());
                 }
                 List<Role> roles = roleMapper.selectBatchIds(roleIds);
                 if (!CollectionUtils.isEmpty(roles)) {
@@ -75,7 +75,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
             if (!CollectionUtils.isEmpty(rolePermissions)) {
                 List<Integer> permissionIds = Lists.newArrayList();
                 for (RolePermission drp : rolePermissions) {
-                    permissionIds.add(drp.getPermission_id());//得到所有权限id
+                    permissionIds.add(drp.getPermissionId());//得到所有权限id
                 }
                 List<Permission> permissions = permissionMapper.selectBatchIds(permissionIds);//根据权限id查所有详情
                 if (!CollectionUtils.isEmpty(permissions)) {
@@ -92,8 +92,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
     @Override
     public User getByUsername(String username) throws Exception {
         User user = new User();
-
-
         List<User> list = baseMapper.selectList(new QueryWrapper<User>().eq("username", username));
         if (!CollectionUtils.isEmpty(list) && list.size() == 1) {
             return list.get(0);

@@ -93,7 +93,7 @@ public class MybatisPlusConfig  implements TransactionManagementConfigurer {
         //设置
         MybatisConfiguration mc = new MybatisConfiguration();
         mc.setDefaultScriptingLanguage(MybatisXMLLanguageDriver.class);
-        mc.setMapUnderscoreToCamelCase(false); //不用驼峰
+        mc.setMapUnderscoreToCamelCase(true); //用驼峰
         //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         mybatisPlus.setMapperLocations(resolver.getResources("classpath:mapper/*.xml"));

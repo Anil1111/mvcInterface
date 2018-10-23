@@ -5,8 +5,8 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.lianhe.nine.intface.po.UserRole">
         <id column="id" property="id" />
-        <result column="user_id" property="user_id" />
-        <result column="role_id" property="role_id" />
+        <result column="user_id" property="userId" />
+        <result column="role_id" property="roleId" />
     </resultMap>
 
     <!-- 通用查询结果列 -->

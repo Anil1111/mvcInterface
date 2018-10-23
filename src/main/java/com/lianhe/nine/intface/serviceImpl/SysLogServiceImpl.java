@@ -37,10 +37,10 @@ public class SysLogServiceImpl extends BaseServiceImpl<SysLogMapper, SysLog> imp
         }
         SysLog sysLog = new SysLog();
         sysLog.setIp(ip);
-        sysLog.setOperate_by(operateBy);
-        sysLog.setOperate_url(operateUrl);
+        sysLog.setOperateBy(operateBy);
+        sysLog.setOperateUrl(operateUrl);
         sysLog.setRemark(remark);
-        sysLog.setCreate_time(createTime);
+        sysLog.setCreateTime(createTime);
         baseMapper.insert(sysLog);
     }
 

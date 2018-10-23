@@ -6,10 +6,10 @@
     <resultMap id="BaseResultMap" type="com.lianhe.nine.intface.po.SysLog">
         <id column="id" property="id" />
         <result column="ip" property="ip" />
-        <result column="create_time" property="create_time" />
+        <result column="create_time" property="createTime" />
         <result column="remark" property="remark" />
-        <result column="operate_url" property="operate_url" />
-        <result column="operate_by" property="operate_by" />
+        <result column="operate_url" property="operateUrl" />
+        <result column="operate_by" property="operateBy" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
