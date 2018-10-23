@@ -48,7 +48,7 @@ spring:
     cache: false
 logging:
   level:
-    com.lianhe.nine.intface.intface: info
+    com.nine.intface: info
     org.springframework: error
     org.springframework.boot.web.embedded.tomcat.TomcatWebServer: info
     org.apache.catalina: error

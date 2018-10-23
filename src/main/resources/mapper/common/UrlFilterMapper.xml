@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nine.intface.common.dao.UrlFilterMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.nine.intface.common.po.UrlFilter">
+        <id column="id" property="id" />
+        <result column="uri" property="uri" />
+        <result column="filter" property="filter" />
+        <result column="parent_sort" property="parentSort" />
+        <result column="sub_sort" property="subSort" />
+        <result column="remark" property="remark" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="creator_name" property="creatorName" />
+        <result column="updator_name" property="updatorName" />
+        <result column="disable_flag" property="disableFlag" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, uri, filter, parent_sort, sub_sort, remark, create_time, update_time, creator_name, updator_name, disable_flag
+    </sql>
+
+</mapper>
