@@ -24,7 +24,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value="UrlFilter对象", description="shiro过滤链表")
-public class UrlFilter extends Model<UrlFilter> implements Comparable<UrlFilter> {
+public class UrlFilter extends Model<UrlFilter>{
 
     private static final long serialVersionUID = 1L;
 
@@ -67,12 +67,6 @@ public class UrlFilter extends Model<UrlFilter> implements Comparable<UrlFilter>
         return this.id;
     }
 
-    @Override
-    public int compareTo(UrlFilter o) {
-        int superResult = parentSort.compareTo(o.getParentSort());
-        int subResult = subSort.compareTo(o.getSubSort());
-        return superResult != 0 ? superResult : subResult;
-    }
 
 
 }

@@ -7,6 +7,7 @@ import com.nine.intface.common.service.IUrlFilterService;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -22,8 +23,18 @@ public class UrlFilterServiceImpl extends BaseServiceImpl<UrlFilterMapper, UrlFi
 	 @Override
     public List<UrlFilter> getAllUrlFilter() throws Exception {
         List<UrlFilter> list=list(new QueryWrapper<UrlFilter>().eq("disable_flag",1));
-        Collections.sort(list);
+        Collections.sort(list, (UrlFilter o1,UrlFilter o2)->{
+            int superResult = o1.getParentSort().compareTo(o2.getParentSort());
+            int subResult = o1.getSubSort().compareTo(o2.getSubSort());
+            return superResult != 0 ? superResult : subResult;
+        });
         return list;
     }
 
-}	
+}
+
+/**
+ *  int superResult = parentSort.compareTo(o.getParentSort());
+ *         int subResult = subSort.compareTo(o.getSubSort());
+ *         return superResult != 0 ? superResult : subResult;
+ */
