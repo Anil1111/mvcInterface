@@ -1,7 +1,7 @@
 package com.nine.intface.common.vo;
 
 
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.nine.intface.common.constants.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +28,12 @@ public class ResultFactory {
 
     public static RestResult getRestResult(int code, String message, Object data) {
         RestResult result = new RestResult(code, message, data);
+        simpleLog(result);
+        return result;
+    }
+
+    public static <T> RestResult getOKRestResult(IPage<T> page) {
+        RestResult result = new RestResult(Constant.SUCCESS.getIndex(), Constant.SUCCESS.getName(), page);
         simpleLog(result);
         return result;
     }
@@ -79,42 +85,9 @@ public class ResultFactory {
         return result;
     }
 
-    public static <T> JeasyResult getJeasySult(int code, String message, PageInfo<T> pageInfo){
-        JeasyResult result =new JeasyResult<>(code,message,pageInfo);
-        simpleLog(result);
-        return result;
-    }
-    public static <T> JeasyResult getOKJeasySult(){
-        JeasyResult result =new JeasyResult<>(Constant.SUCCESS.getIndex(), Constant.SUCCESS.getName());
-        simpleLog(result);
-        return result;
-    }
-    public static <T> JeasyResult getFailedJeasySult(){
-        JeasyResult result =new JeasyResult<>(Constant.FAILED.getIndex(), Constant.FAILED.getName());
-        simpleLog(result);
-        return result;
-    }
-    public static <T> JeasyResult getFailedJeasySult(T t){
-        JeasyResult result =new JeasyResult<>(Constant.FAILED.getIndex(), Constant.FAILED.getName(),t);
-        simpleLog(result);
-        return result;
-    }
-    public static <T> JeasyResult getJeasySult(int code, String message, long total, List<T> rows){
-        JeasyResult result =new JeasyResult<>(code,message,total,rows);
-        simpleLog(result);
-        return result;
-    }
 
-    public static <T> JeasyResult getOKJeasySult(PageInfo<T> pageInfo) {
-        JeasyResult result =new JeasyResult<>(Constant.SUCCESS.getIndex(), Constant.SUCCESS.getName(),pageInfo);
-        simpleLog(result);
-        return result;
-    }
-    public static <T> JeasyResult getOKJeasySult(T t) {
-        JeasyResult result =new JeasyResult<>(Constant.SUCCESS.getIndex(), Constant.SUCCESS.getName(),t);
-        simpleLog(result);
-        return result;
-    }
+
+
 
     public static ExceptionResult getExceptionInfo(Constant c){
         ExceptionResult result =ResultFactory.getExceptionResult(c.getIndex(),c.getName());

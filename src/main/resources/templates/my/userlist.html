@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-      layout:decorate="my/layout/layout">
+      layout:decorate="~{my/layout/layout}">
 <head></head>
 <body>
         <div layout:fragment="content" class="sidebar-sticky">
@@ -23,7 +23,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="user:${Result.data.list}">
+                    <tr th:each="user:${Result.data}">
                         <th>[[${user.id}]]</th>
                         <th>[[${user.nickName}]]</th>
                         <th>[[${user.username}]]</th>

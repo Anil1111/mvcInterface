@@ -6,12 +6,10 @@ import com.baomidou.mybatisplus.core.MybatisXMLLanguageDriver;
 import com.baomidou.mybatisplus.core.config.GlobalConfig;
 import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector;
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
-import com.github.pagehelper.PageInterceptor;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
-
-
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,13 +52,21 @@ public class MybatisPlusConfig  implements TransactionManagementConfigurer {
      * @return
      * @throws Exception
      */
-    public Interceptor getpageHelperPlugin(){
-        PageInterceptor pageHelperInterceptor = new PageInterceptor();
-        Properties properties = new Properties();
-        properties.setProperty("reasonable", "true");
-        properties.setProperty("helperDialect", "mysql");
-        pageHelperInterceptor.setProperties(properties);
-        return pageHelperInterceptor;
+   // public Interceptor getpageHelperPlugin(){
+//        PageInterceptor pageHelperInterceptor = new PageInterceptor();
+//        Properties properties = new Properties();
+//        properties.setProperty("reasonable", "true");
+//        properties.setProperty("helperDialect", "mysql");
+//        pageHelperInterceptor.setProperties(properties);
+//        return pageHelperInterceptor;
+  //  }
+
+    /*@Bean*/
+    public PaginationInterceptor paginationInterceptor() {
+        logger.info("----------------ConfigInit:paginationInterceptor");
+        PaginationInterceptor interceptor=   new PaginationInterceptor();
+//        interceptor.setOverflow(true);
+        return interceptor;
     }
 
     @Bean(name = "sqlSessionFactory")
@@ -84,7 +90,7 @@ public class MybatisPlusConfig  implements TransactionManagementConfigurer {
 
 
         //添加插件
-        mybatisPlus.setPlugins(new Interceptor[]{getpageHelperPlugin()});
+        mybatisPlus.setPlugins(new Interceptor[]{paginationInterceptor()});
 
         //设置
         MybatisConfiguration mc = new MybatisConfiguration();

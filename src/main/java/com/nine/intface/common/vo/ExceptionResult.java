@@ -22,17 +22,4 @@ public class ExceptionResult extends Result implements Serializable {
     public ExceptionResult(int code,Exception e){
         super(code,e.getClass().getName());
     }
-
-//    @Override
-//    public String toString() {
-////        final StringBuilder sb = new StringBuilder("{");
-////        sb.append("\"code\":")
-////                .append(getCode());
-////        sb.append(",\"message\":\"")
-////                .append(getMessage()).append('\"');
-////        sb.append("}\n");
-////        return sb.toString();
-//        return JSON.toJSONString(this);
-//
-//    }
 }

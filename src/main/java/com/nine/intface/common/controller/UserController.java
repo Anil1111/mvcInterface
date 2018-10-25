@@ -2,7 +2,8 @@ package com.nine.intface.common.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.nine.intface.common.constants.Constant;
 import com.nine.intface.common.po.User;
 import com.nine.intface.common.service.IUserService;
@@ -98,8 +99,9 @@ public class UserController {
     @GetMapping(value = "/page/{page_index}")
     public String getAll(@PathVariable int page_index,Model model) throws Exception {
         Result result;
-        PageInfo<User> pageInfo = userService.getPageByHelper(page_index, Constant.PAGE_SIZE.getIndex(), new QueryWrapper<>());
-        result = ResultFactory.getOKRestResult(pageInfo);
+        Page<User> page = new Page<>(page_index,Constant.PAGE_SIZE.getIndex());
+        IPage<User> users = userService.page(page, new QueryWrapper<>());
+        result = ResultFactory.getOKRestResult(users);
         model.addAttribute("Result",result);
         return "my/userlist";
     }
