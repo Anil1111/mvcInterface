@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
  * <p>
@@ -35,10 +36,7 @@ public class UserController {
     @Autowired
     private HttpServletRequest request;
 
-    @GetMapping(value = "/")
-    public String index() throws Exception {
-        return "my/layout/layout";
-    }
+
     @GetMapping(value = "/user/{user_id}")
     public String get(@PathVariable int user_id, Model model) throws Exception {
 
@@ -49,7 +47,7 @@ public class UserController {
         } else {
             result = ResultFactory.getFailedRestResult();
         }
-        model.addAttribute("Result",result);
+        model.addAttribute("result",result);
         return "";
     }
 
@@ -64,7 +62,7 @@ public class UserController {
         } else {
             result = ResultFactory.getFailedRestResult();
         }
-        model.addAttribute("Result",result);
+        model.addAttribute("result",result);
         return "";
     }
   //  @RequiresRoles(RoleEnum.ADMIN)
@@ -77,7 +75,7 @@ public class UserController {
             } else {
                 result = ResultFactory.getFailedRestResult(bResult);
             }
-        model.addAttribute("Result",result);
+        model.addAttribute("result",result);
 
         return "";
     }
@@ -91,21 +89,23 @@ public class UserController {
         } else {
             result = ResultFactory.getFailedRestResult();
         }
-        model.addAttribute("Result",result);
+        model.addAttribute("result",result);
 
         return "";
     }
-   // @RequiresRoles(RoleEnum.ADMIN)
     @GetMapping(value = "/page/{page_index}")
     public String getAll(@PathVariable int page_index,Model model) throws Exception {
         Result result;
         Page<User> page = new Page<>(page_index,Constant.PAGE_SIZE.getIndex());
         IPage<User> users = userService.page(page, new QueryWrapper<>());
         result = ResultFactory.getOKRestResult(users);
-        model.addAttribute("Result",result);
+        model.addAttribute("result",result);
         return "my/userlist";
     }
-
+    @GetMapping(value = "/index")
+    public String index() throws Exception {
+        return "forward:/users/page/1";
+    }
 
 }
 

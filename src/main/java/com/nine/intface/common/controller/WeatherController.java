@@ -12,10 +12,14 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
 
@@ -50,7 +54,7 @@ public class WeatherController implements BaseHandler {
         //get 用hashmap 填充,相当于  obj..)    post必须使用 LinkMultiValueMap
         HashMap<String, Object> map = Maps.newHashMap();
         map.put("city", city);
-        return ResultFactory.getOKRestResult(getSimple(URLConstant.ETOUCH_WEATHER,map,restTemplate));
+        return ResultFactory.getOKRestResult(getSimple(URLConstant.ETOUCH_WEATHER, map, restTemplate));
     }
 
     @ApiOperation(httpMethod = "POST", value = "根据ip查询地址信息", tags = {"测试用接口"})
@@ -59,7 +63,11 @@ public class WeatherController implements BaseHandler {
     public Result getIpAdressInfo(@RequestParam String ip) throws Exception {
         HashMap<String, Object> map = Maps.newHashMap();
         map.put("ip", ip);
-        return ResultFactory.getOKRestResult(getSimple(URLConstant.TAOBAO_IP,map,restTemplate));
+        return ResultFactory.getOKRestResult(getSimple(URLConstant.TAOBAO_IP, map, restTemplate));
     }
+
+
+
+
 
 }

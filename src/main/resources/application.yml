@@ -4,7 +4,6 @@ server:
       context-path: /interface
   tomcat:
     uri-encoding: UTF-8
-
 spring:
   profiles:
     active: nine
@@ -46,6 +45,10 @@ spring:
     mode: "HTML"
     encoding: "UTF-8"
     cache: false
+  servlet:
+    multipart:
+      max-file-size: "50MB"
+      max-request-size: "50MB"
 logging:
   level:
     com.nine.intface: info
@@ -71,6 +74,10 @@ logging:
 rubi:
   exception:
     doLog: false
+  file:
+    upload:
+      folder: "D:/test/"
+
 #是否打印栈堆
 #  file: project.log
 #======================================================

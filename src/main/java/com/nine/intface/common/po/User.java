@@ -26,7 +26,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("developer_user")
 @ApiModel(value="User对象", description="用户表")
-public class User extends Model<User> {
+public class User extends Model<User>{
 
     private static final long serialVersionUID = 1L;
 
@@ -69,5 +69,6 @@ public class User extends Model<User> {
     protected Serializable pkVal() {
         return this.id;
     }
+
 
 }

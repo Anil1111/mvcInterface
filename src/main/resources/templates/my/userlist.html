@@ -2,7 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorate="~{my/layout/layout}">
-<head></head>
+<head>
+    <title layout:fragment="title">用户信息</title>
+</head>
 <body>
         <div layout:fragment="content" class="sidebar-sticky">
             <h2>用户信息</h2>
@@ -23,7 +25,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="user:${Result.data}">
+                    <tr th:each="user:${result.data}">
                         <th>[[${user.id}]]</th>
                         <th>[[${user.nickName}]]</th>
                         <th>[[${user.username}]]</th>
