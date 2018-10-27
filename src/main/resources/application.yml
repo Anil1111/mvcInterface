@@ -39,6 +39,8 @@ spring:
   jackson:
     date-format: "yyyy-MM-dd HH:mm:ss"
     time-zone: "GMT+8"
+    serialization:
+      write-dates-as-timestamps: false #使用时间戳，使用数值timestamp表示日期
   thymeleaf:
     prefix: "classpath:/templates/"
     suffix: ".html"
@@ -76,7 +78,7 @@ rubi:
     doLog: false
   file:
     upload:
-      folder: "D:/test/"
+      folder: "D:\\test\\"
 
 #是否打印栈堆
 #  file: project.log

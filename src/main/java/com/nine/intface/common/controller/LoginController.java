@@ -113,7 +113,6 @@ public class LoginController implements BaseHandler {
         // 根据shiro返回的异常类路径判断，抛出指定异常信息
         //不可缺少
         logger.info("ajaxlogin");
-        Result result;
         String exceptionClassName = (String) request.getAttribute(Constant.SHIRO_LOGIN_FAILURE.getName());
         if (exceptionClassName != null) {
             Exception exception = (Exception) Class.forName(exceptionClassName).newInstance();

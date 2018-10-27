@@ -16,9 +16,7 @@
                             <th>昵称</th>
                             <th>账号</th>
                             <th>描述信息</th>
-                            <th>创建人</th>
                             <th>创建时间</th>
-                            <th>更新人</th>
                             <th>更新时间</th>
                             <th>禁用/启用</th>
                             <th>操作</th>
@@ -30,34 +28,23 @@
                             <td>[[${user.nickName}]]</td>
                             <td>[[${user.username}]]</td>
                             <td>[[${user.description}]]</td>
-                            <td>[[${user.creatorName}]]</td>
-                            <td>[[${user.createTime}]]</td>
-                            <td>[[${user.updatorName}]]</td>
-                            <td>[[${user.updateTime}]]</td>
+                            <td>[[${#dates.format(user.createTime, 'yyyy-MM-dd HH:mm:ss')}]]</td>
+                            <td>[[${#dates.format(user.updateTime, 'yyyy-MM-dd HH:mm:ss')}]]</td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label th:class="${user.disableFlag eq 1}?'btn btn-secondary active':'btn btn-secondary'">
+                                    <label th:class="${user.disableFlag eq 1}?'btn btn-secondary active btn-sm':'btn btn-secondary btn-sm'">
                                         <input type="radio" th:name="${user.id}" id="on" autocomplete="off"/> 启用
                                     </label>
-                                    <label th:class="${user.disableFlag eq 0}?'btn btn-secondary active':'btn btn-secondary'">
+                                    <label th:class="${user.disableFlag eq 0}?'btn btn-secondary active btn-sm':'btn btn-secondary btn-sm'">
                                         <input type="radio" th:name="${user.id}" id="off" autocomplete="off"/> 禁用
                                     </label>
                                 </div>
-                                <!--<button type="button"-->
-                                        <!--th:class="${user.disableFlag eq 1}?'btn btn-primary':'btn btn-danger'">-->
-                                    <!--[[${user.disableFlag eq 1}?禁用:启用]]-->
-                                <!--</button>-->
                             </td>
                             <td>
-                                <!--<div class="btn-group btn-group-toggle" data-toggle="buttons">-->
-                                    <!--<label class="btn btn-secondary active">-->
-                                        <!--<input type="radio" name="options" id="option1" autocomplete="off"/>-->
-                                        <!--修改-->
-                                    <!--</label>-->
-                                    <!--<label class="btn btn-secondary">-->
-                                        <!--<input type="radio" name="options" id="option3" autocomplete="off"/> 删除-->
-                                    <!--</label>-->
-                                <!--</div>-->
+                                <div class="btn-group" role="group" aria-label="cs">
+                                    <button type="button" class="btn btn-primary btn-sm">修改</button>
+                                    <button type="button" class="btn btn-danger btn-sm">删除</button>
+                                </div>
                             </td>
                         </tr>
                     </tbody>

@@ -36,7 +36,7 @@ public class FileController {
         logger.info("{}-->{}",file.getOriginalFilename(),file.getSize());
         File dest = new File(UPLOAD_FOLDER  + file.getOriginalFilename());
         if (!dest.getParentFile().exists()) { //判断文件父目录是否存在
-            dest.getParentFile().mkdir();
+            dest.getParentFile().mkdirs();
         }
         file.transferTo(dest); //保存文件
         result = ResultFactory.getOKRestResult();

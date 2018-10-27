@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.nine.intface.common.constants.Constant;
 import com.nine.intface.common.po.User;
 import com.nine.intface.common.service.IUserService;
+import com.nine.intface.common.vo.RestResult;
 import com.nine.intface.common.vo.Result;
 import com.nine.intface.common.vo.ResultFactory;
 import io.swagger.annotations.Api;
