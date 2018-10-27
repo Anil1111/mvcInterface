@@ -53,7 +53,8 @@ public class UserController {
 
   //  @RequiresRoles(RoleEnum.ADMIN)
     @PutMapping(value = "/user/{user_id}")
-    public String update(@PathVariable int user_id, User user,Model model) throws Exception {
+    @ResponseBody
+    public Result update(@PathVariable int user_id,User user,Model model) throws Exception {
         Result result;
         user.setId(user_id);
         boolean bResult = userService.updateById(user);
@@ -62,8 +63,7 @@ public class UserController {
         } else {
             result = ResultFactory.getFailedRestResult();
         }
-        model.addAttribute("result",result);
-        return "";
+        return  result;
     }
   //  @RequiresRoles(RoleEnum.ADMIN)
     @DeleteMapping(value = "/user/{user_id}")

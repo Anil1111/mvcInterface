@@ -1,46 +1,78 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorate="~{my/layout/layout}">
-<head>
-    <title layout:fragment="title">用户信息</title>
-</head>
-<body>
+    <head>
+        <title>用户信息</title>
+    </head>
+    <body>
         <div layout:fragment="content" class="sidebar-sticky">
             <h2>用户信息</h2>
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>昵称</th>
-                        <th>账号</th>
-                        <th>密码</th>
-                        <th>描述信息</th>
-                        <th>创建人</th>
-                        <th>创建时间</th>
-                        <th>更新人</th>
-                        <th>更新时间</th>
-                        <th>禁用/启用</th>
-                    </tr>
+                        <tr>
+                            <th>id</th>
+                            <th>昵称</th>
+                            <th>账号</th>
+                            <th>描述信息</th>
+                            <th>创建人</th>
+                            <th>创建时间</th>
+                            <th>更新人</th>
+                            <th>更新时间</th>
+                            <th>禁用/启用</th>
+                            <th>操作</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="user:${result.data}">
-                        <th>[[${user.id}]]</th>
-                        <th>[[${user.nickName}]]</th>
-                        <th>[[${user.username}]]</th>
-                        <th>[[${user.password}]]</th>
-                        <th>[[${user.description}]]</th>
-                        <th>[[${user.creatorName}]]</th>
-                        <th>[[${user.createTime}]]</th>
-                        <th>[[${user.updatorName}]]</th>
-                        <th>[[${user.updateTime}]]</th>
-                        <th>[[${user.disableFlag}]]</th>
-                    </tr>
+                        <tr th:each="user:${result.data.records}">
+                            <td>[[${user.id}]]</td>
+                            <td>[[${user.nickName}]]</td>
+                            <td>[[${user.username}]]</td>
+                            <td>[[${user.description}]]</td>
+                            <td>[[${user.creatorName}]]</td>
+                            <td>[[${user.createTime}]]</td>
+                            <td>[[${user.updatorName}]]</td>
+                            <td>[[${user.updateTime}]]</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label th:class="${user.disableFlag eq 1}?'btn btn-secondary active':'btn btn-secondary'">
+                                        <input type="radio" th:name="${user.id}" id="on" autocomplete="off"/> 启用
+                                    </label>
+                                    <label th:class="${user.disableFlag eq 0}?'btn btn-secondary active':'btn btn-secondary'">
+                                        <input type="radio" th:name="${user.id}" id="off" autocomplete="off"/> 禁用
+                                    </label>
+                                </div>
+                                <!--<button type="button"-->
+                                        <!--th:class="${user.disableFlag eq 1}?'btn btn-primary':'btn btn-danger'">-->
+                                    <!--[[${user.disableFlag eq 1}?禁用:启用]]-->
+                                <!--</button>-->
+                            </td>
+                            <td>
+                                <!--<div class="btn-group btn-group-toggle" data-toggle="buttons">-->
+                                    <!--<label class="btn btn-secondary active">-->
+                                        <!--<input type="radio" name="options" id="option1" autocomplete="off"/>-->
+                                        <!--修改-->
+                                    <!--</label>-->
+                                    <!--<label class="btn btn-secondary">-->
+                                        <!--<input type="radio" name="options" id="option3" autocomplete="off"/> 删除-->
+                                    <!--</label>-->
+                                <!--</div>-->
+                            </td>
+                        </tr>
                     </tbody>
 
                 </table>
+                <div th:with="url=@{/users/page}">
+                    <div th:replace="my/layout/page :: page">
+                    </div>
+                </div>
             </div>
         </div>
-</body>
+        <script th:src="@{/my/js/user.js}" layout:fragment="customjs" ></script>
+
+    </body>
+
+
+
 </html>

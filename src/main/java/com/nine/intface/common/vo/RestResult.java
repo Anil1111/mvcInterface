@@ -27,7 +27,7 @@ public class RestResult extends Result implements Serializable{
 
     public <T> RestResult(int code,String message,IPage<T> page){
         super(code,message);
-        this.data=page.getRecords();
+        this.data=page;
     }
     public RestResult(int code,String message){
         super(code,message);
