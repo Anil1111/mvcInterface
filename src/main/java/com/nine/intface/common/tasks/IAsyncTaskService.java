@@ -12,7 +12,7 @@ import java.util.Map;
 
 public interface IAsyncTaskService {
     @Async
-    void logOne(String url, Map params)throws Exception;
+    void logOne(String method,String url, Map params)throws Exception;
     @Async
     void recordOne(String ip, String operateBy, String operateUrl, String remark, Date createTime)throws Exception;
 

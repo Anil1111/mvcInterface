@@ -35,8 +35,9 @@ public class SysLogServiceImpl extends BaseServiceImpl<SysLogMapper, SysLog> imp
     }
 
     @Override
-    public void logOne(String url, Map params) throws Exception {
-        logger.info("uri    : " + url);
-        logger.info("params : " + params);
+    public void logOne(String method,String url, Map params) throws Exception {
+        logger.info("method : {}",method);
+        logger.info("uri    : {}",url);
+        logger.info("params : {}",params);
     }
 }

@@ -50,6 +50,7 @@ public class RubiRoleFilter extends RolesAuthorizationFilter implements BaseHand
                         getIpAddress(req),req.getHeader("User-Agent"),
                         URLDecoder.decode(req.getRequestURI(), StandardCharsets.UTF_8.name()),Strings.EMPTY,new Date());
                 sysLogService.logOne(
+                        req.getMethod(),
                         URLDecoder.decode(req.getRequestURI(), StandardCharsets.UTF_8.name())
                         ,this.getRequestMapSingle(req));
             } catch (Exception e) {

@@ -1,23 +1,20 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <!--<script th:src="@{/my/js/page.js}"></script>-->
     <div th:fragment="page" class="float-right">
         <nav aria-label="page">
             <ul class="pagination"
-                th:with="pages=${result.data.total%result.data.size} eq 0 ?
-                 ${result.data.total/result.data.size}:${result.data.total/result.data.size}+1">
+                th:with="pages=${result.data.total%result.data.size} eq 0 ? ${result.data.total/result.data.size} : ${result.data.total/result.data.size} + 1">
                 <li th:class="${result.data.current le result.data.size} ? 'page-item disabled' : 'age-item'">
                     <a class="page-link"
-                       th:href="@{{url}/{pageNo}(url=${url},pageNo=${(result.data.current/result.data.size-1)*result.data.size +1 le result.data.size} ?
-                        ${pages}:${(result.data.current/result.data.size-1)*result.data.size})}">
+                       th:href="@{{url}/{pageNo}(url=${url},pageNo=${(result.data.current/result.data.size - 1)*result.data.size + 1 le result.data.size} ?
+                        1:${(result.data.current/result.data.size - 1)*result.data.size})}">
                         Previous
                     </a>
                 </li>
                 <li th:each="pageNo : ${#numbers.sequence(
-                (result.data.current-1)/result.data.size*result.data.size+1,
-                 (((result.data.current-1)/result.data.size+1)*result.data.size+1) ge pages ?
-                  pages:(((result.data.current-1)/result.data.size+1)*result.data.size+1)
-                 )}" th:class="${result.data.current eq pageNo}? 'page-item active' : 'page-item'">
+                (result.data.current - 1)/result.data.size*result.data.size + 1,
+                 (((result.data.current - 1)/result.data.size + 1)*result.data.size + 1) ge pages ?
+                  pages : (((result.data.current - 1)/result.data.size + 1)*result.data.size + 1))}" th:class="${result.data.current eq pageNo}? 'page-item active' : 'page-item'">
                     <a class="page-link" th:href="@{{url}/{pageNo}(url=${url},pageNo=${pageNo})}">
                         <span th:text="${pageNo}"></span>
                     </a>
@@ -25,8 +22,8 @@
                 </li>
                 <li th:class="${result.data.current ge pages} ? 'page-item disabled' : 'age-item'">
                     <a class="page-link"
-                       th:href="@{{url}/{pageNo}(url=${url},pageNo=${(result.data.current/result.data.size+1)*result.data.size +1 ge pages} ?
-                        ${pages}:${(result.data.current/result.data.size+1)*result.data.size})}">
+                       th:href="@{{url}/{pageNo}(url=${url},pageNo=${(result.data.current/result.data.size + 1)*result.data.size + 1 ge pages} ?
+                        ${pages}:${(result.data.current/result.data.size + 1)*result.data.size})}">
                         Next
                     </a>
                 </li>

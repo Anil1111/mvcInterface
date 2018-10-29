@@ -38,6 +38,7 @@ public class RequestInterceptor implements HandlerInterceptor,BaseHandler {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         sysLogService.logOne(
+                request.getMethod(),
                 URLDecoder.decode(request.getRequestURI(), StandardCharsets.UTF_8.name())
                 ,this.getRequestMapSingle(request));
         return true;

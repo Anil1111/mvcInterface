@@ -26,8 +26,8 @@ public class AsyncTaskServiceImpl implements IAsyncTaskService {
     }
 
     @Override
-    public void logOne(String url, Map params) throws Exception {
-        sysLogService.logOne(url, params);
+    public void logOne(String method,String url, Map params) throws Exception {
+        sysLogService.logOne(method,url, params);
     }
 
 

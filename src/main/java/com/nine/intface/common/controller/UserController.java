@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.nine.intface.common.constants.Constant;
 import com.nine.intface.common.po.User;
 import com.nine.intface.common.service.IUserService;
-import com.nine.intface.common.vo.RestResult;
+import com.nine.intface.common.tools.CodeGenerator;
 import com.nine.intface.common.vo.Result;
 import com.nine.intface.common.vo.ResultFactory;
 import io.swagger.annotations.Api;
@@ -17,7 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
+import java.util.Date;
 
 /**
  * <p>
@@ -39,7 +39,8 @@ public class UserController {
 
 
     @GetMapping(value = "/user/{user_id}")
-    public String get(@PathVariable int user_id, Model model) throws Exception {
+    @ResponseBody
+    public Result get(@PathVariable int user_id) throws Exception {
 
         Result result;
         User user = userService.getById(user_id);
@@ -48,16 +49,17 @@ public class UserController {
         } else {
             result = ResultFactory.getFailedRestResult();
         }
-        model.addAttribute("result",result);
-        return "";
+        return result;
     }
 
   //  @RequiresRoles(RoleEnum.ADMIN)
     @PutMapping(value = "/user/{user_id}")
     @ResponseBody
-    public Result update(@PathVariable int user_id,User user,Model model) throws Exception {
+    public Result update(@PathVariable int user_id,User user) throws Exception {
         Result result;
         user.setId(user_id);
+        user.setUpdateTime(new Date());
+        user.setPassword(CodeGenerator.nineMD5(user.getPassword()));
         boolean bResult = userService.updateById(user);
         if (bResult) {
             result = ResultFactory.getOKRestResult(bResult);
@@ -68,7 +70,8 @@ public class UserController {
     }
   //  @RequiresRoles(RoleEnum.ADMIN)
     @DeleteMapping(value = "/user/{user_id}")
-    public String delete(@PathVariable int user_id,Model model) throws Exception {
+    @ResponseBody
+    public Result delete(@PathVariable int user_id) throws Exception {
         Result result;
             boolean bResult = userService.removeById(user_id);
             if (bResult) {
@@ -76,23 +79,25 @@ public class UserController {
             } else {
                 result = ResultFactory.getFailedRestResult(bResult);
             }
-        model.addAttribute("result",result);
 
-        return "";
+
+        return  result;
     }
    // @RequiresRoles(RoleEnum.ADMIN)
     @PostMapping(value = "/user")
-    public String insert(User user,Model model) throws Exception {
+    @ResponseBody
+    public Result insert(User user) throws Exception {
         Result result;
+        user.setCreateTime(new Date());
+        user.setUpdateTime(new Date());
+        user.setPassword(CodeGenerator.nineMD5(user.getPassword()));
         boolean bResult = userService.save(user);
         if (bResult) {
             result = ResultFactory.getOKRestResult(bResult);
         } else {
             result = ResultFactory.getFailedRestResult();
         }
-        model.addAttribute("result",result);
-
-        return "";
+        return result;
     }
     @GetMapping(value = "/page/{page_index}")
     public String getAll(@PathVariable int page_index,Model model) throws Exception {

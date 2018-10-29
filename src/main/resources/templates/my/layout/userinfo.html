@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <div id="updateForm" class="modal-body" th:fragment="updateInfo">
+            <form>
+                <div class="form-group row">
+                    <label for="updateId" class="col-sm-2 col-form-label">Id</label>
+                    <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="updateId" value="">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="updateNickName" class="col-sm-2 col-form-label">NickName</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="updateNickName" placeholder="NickName">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="updateUsername" class="col-sm-2 col-form-label">Username</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="updateUsername" placeholder="Username">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="updatePassword" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="updatePassword" placeholder="Password">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="updateDescription" class="col-sm-2 col-form-label">Description</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="updateDescription" placeholder="Description">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div id="insertForm" class="modal-body" th:fragment="insertInfo">
+            <form>
+
+                <div class="form-group row">
+                    <label for="insertNickName" class="col-sm-2 col-form-label">NickName</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="insertNickName" placeholder="NickName">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="insertUsername" class="col-sm-2 col-form-label">Username</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="insertUsername" placeholder="Username">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="insertPassword" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="insertPassword" placeholder="Password">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="insertDescription" class="col-sm-2 col-form-label">Description</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="insertDescription" placeholder="Description">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

@@ -42,21 +42,24 @@
                             </td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="cs">
-                                    <button type="button" class="btn btn-primary btn-sm">修改</button>
-                                    <button type="button" class="btn btn-danger btn-sm">删除</button>
+                                    <button type="button"  th:onclick="'javascript:showUpdateLayer('+${user.id}+')'" class="btn btn-primary btn-sm">修改</button>
+                                    <button type="button"  th:onclick="'javascript:showDeleteLayer('+${user.id}+')'" class="btn btn-danger btn-sm">删除</button>
                                 </div>
                             </td>
                         </tr>
                     </tbody>
 
                 </table>
+
+                <div><button type="button" class="btn btn-success" th:onclick="'javascript:showInsertLayer()'">新增用户</button></div>
+                <div th:replace="my/layout/confirm :: layer"></div>
                 <div th:with="url=@{/users/page}">
                     <div th:replace="my/layout/page :: page">
                     </div>
                 </div>
             </div>
         </div>
-        <script th:src="@{/my/js/user.js}" layout:fragment="customjs" ></script>
+        <script th:src="@{/my/js/user.js}" layout:fragment="customjs"></script>
 
     </body>
 
