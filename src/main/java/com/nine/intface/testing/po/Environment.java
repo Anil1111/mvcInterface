@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * url 表
+ * 环境表
  * </p>
  *
  * @author Rubi
@@ -24,22 +24,25 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("test_url")
-@ApiModel(value="Url对象", description="url 表")
-public class Url extends Model<Url> {
+@TableName("test_environment")
+@ApiModel(value="Environment对象", description="环境表")
+public class Environment extends Model<Environment> {
 
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty(value = "协议类型")
+    @ApiModelProperty(value = "项目id")
+    private Integer projectId;
+
+    @ApiModelProperty(value = "通信协议")
     private String scheme;
 
     @ApiModelProperty(value = "http请求类型")
     private String httpMethod;
 
-    @ApiModelProperty(value = "域名或ip地址")
+    @ApiModelProperty(value = "ip地址或域名")
     private String host;
 
     @ApiModelProperty(value = "端口号")
@@ -48,17 +51,14 @@ public class Url extends Model<Url> {
     @ApiModelProperty(value = "路径")
     private String path;
 
-    @ApiModelProperty(value = "url名称")
-    private String urlName;
+    @ApiModelProperty(value = "备注")
+    private String remark;
 
     @ApiModelProperty(value = "更新时间")
     private Date updateTime;
 
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
-
-    @ApiModelProperty(value = "备注")
-    private String remark;
 
     @ApiModelProperty(value = "逻辑删除标识")
     @TableLogic

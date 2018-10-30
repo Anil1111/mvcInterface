@@ -101,8 +101,8 @@ public class ExceptionResolver {
 //			result =ResultFactory.getExceptionInfo(Constant.EXCEPTION_TEMPLATEENGINEEXCEPTION);
 
 //		} else if (ex instanceof DataIntegrityViolationException){
-		} else if (ex instanceof RuntimeException){
-			result =ResultFactory.getOtherExceptionResult(ex);
+//		} else if (ex instanceof RuntimeException){
+//			result =ResultFactory.getOtherExceptionResult(ex);
 		} else {
             result =ResultFactory.getOtherExceptionResult(ex);
 		}

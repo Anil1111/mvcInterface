@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -52,7 +53,7 @@ public class WeatherController implements BaseHandler {
     @ResponseBody
     public Result getWeatherInfo(@RequestParam String city) throws Exception {
         //get 用hashmap 填充,相当于  obj..)    post必须使用 LinkMultiValueMap
-        HashMap<String, Object> map = Maps.newHashMap();
+        Map<String, Object> map = Maps.newHashMap();
         map.put("city", city);
         return ResultFactory.getOKRestResult(getSimple(URLConstant.ETOUCH_WEATHER, map, restTemplate));
     }
@@ -61,7 +62,7 @@ public class WeatherController implements BaseHandler {
     @ApiImplicitParam(name = "ip", value = "城市", dataType = "String", paramType = "query", example = "117.148.92.108")
     @PostMapping("/ip")
     public Result getIpAdressInfo(@RequestParam String ip) throws Exception {
-        HashMap<String, Object> map = Maps.newHashMap();
+        Map<String, Object> map = Maps.newHashMap();
         map.put("ip", ip);
         return ResultFactory.getOKRestResult(getSimple(URLConstant.TAOBAO_IP, map, restTemplate));
     }

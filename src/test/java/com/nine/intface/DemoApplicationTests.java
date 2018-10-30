@@ -1,5 +1,9 @@
 package com.nine.intface;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.nine.intface.common.constants.ActionConstant;
 import com.nine.intface.common.dao.UserMapper;
 import com.nine.intface.common.service.IUrlFilterService;
 import com.nine.intface.common.tasks.IAsyncTaskService;
@@ -9,8 +13,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpMethod;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.springframework.http.HttpMethod.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -33,19 +46,8 @@ public class DemoApplicationTests {
 
         System.out.println(json);
     }
-    @Test
-    public void 测试查询(){
-        System.out.println(userMapper.selectObjs(null));
-    }
-//    @Test
-//    public void 测试异步()throws Exception{
-//        asyncTaskService.test1();
-//        asyncTaskService.test2();
-//        try {
-//            logger.info("begin to deal other Task!");
-//            Thread.sleep(10000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//    }
+
+
+
+
 }

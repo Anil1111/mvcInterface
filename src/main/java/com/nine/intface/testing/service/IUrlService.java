@@ -3,6 +3,10 @@ package com.nine.intface.testing.service;
 
 import com.nine.intface.common.service.IBaseService;
 import com.nine.intface.testing.po.Url;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.MultiValueMap;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -12,6 +16,10 @@ import com.nine.intface.testing.po.Url;
  * @author Rubi
  * @since 2018-10-23
  */
+@Transactional(rollbackFor = Exception.class)
 public interface IUrlService extends IBaseService<Url> {
 
+    <T> T doHanle(String scheme,String method, String host, Integer port, String path,
+                  String file, MultiValueMap<String,String> requestParams, MultiValueMap<String,String> requestHeaders,
+                  MultiValueMap<String,String> requestBodys,Class<T> clazz)throws Exception;
 }

@@ -52,11 +52,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
                     Set<Role> roleSet = Sets.newHashSet(roles);
                     return roleSet;
                 }
-                return null;
+                return Sets.newHashSet();
             }
-            return null;
+            return Sets.newHashSet();
         }
-        return null;
+        return Sets.newHashSet();
     }
 
     @Override
@@ -79,11 +79,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
                     Set<Permission> permissionSet = Sets.newHashSet(permissions);
                     return permissionSet;
                 }
-                return null;
+                return Sets.newHashSet();
             }
-            return null;
+            return Sets.newHashSet();
         }
-        return null;
+        return Sets.newHashSet();
     }
 
     @Override
