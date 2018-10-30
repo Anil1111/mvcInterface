@@ -1,6 +1,7 @@
 package com.nine.intface.testing.serviceImpl;
 
 
+import com.alibaba.fastjson.JSON;
 import com.nine.intface.common.constants.MethodConstant;
 import com.nine.intface.common.serviceImpl.BaseServiceImpl;
 import com.nine.intface.testing.dao.UrlMapper;
@@ -19,6 +20,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,15 +43,30 @@ public class UrlServiceImpl extends BaseServiceImpl<UrlMapper, Url> implements I
      * */
     @Override
     public <T> T doHanle(String scheme, String method, String host, Integer port, String path, String file,
-                         MultiValueMap<String, String> requestParams, MultiValueMap<String, String> requestHeaders,
-                         MultiValueMap<String, String> requestBodys, Class<T> clazz) throws Exception {
+                         String params, String headers,
+                         String bodys, Class<T> clazz) throws Exception {
+        Map<String, String> mapBodys = JSON.parseObject(bodys, Map.class);
+        MultiValueMap<String, String> requestBodys = new LinkedMultiValueMap<>();
+        for (Map.Entry<String, String> entry : mapBodys.entrySet()) {
+            requestBodys.add(entry.getKey(), entry.getValue());
+        }
+        Map<String, String> mapParams = JSON.parseObject(params, Map.class);
+        MultiValueMap<String, String> requestParams = new LinkedMultiValueMap<>();
+        for (Map.Entry<String, String> entry : mapParams.entrySet()) {
+            requestParams.add(entry.getKey(), entry.getValue());
+        }
+        Map<String, String> mapHeaders = JSON.parseObject(headers, Map.class);
+        MultiValueMap<String, String> requestHeaders = new LinkedMultiValueMap<>();
+        for (Map.Entry<String, String> entry : mapHeaders.entrySet()) {
+            requestHeaders.add(entry.getKey(), entry.getValue());
+        }
         ResponseEntity<T> response;
         HttpHeaders httpHeaders = new HttpHeaders();
         //如果不传入method ,默认get
         if (StringUtils.isEmpty(method)) {
             method = HttpMethod.GET.name();
         }
-        method=  method.toUpperCase();
+        method = method.toUpperCase();
         port = port != null && port != 0 ? port : 80;
         StringBuffer url = new StringBuffer();
         url.append(scheme).append("://").append(host).append(":").append(port).append("/")
@@ -75,7 +92,6 @@ public class UrlServiceImpl extends BaseServiceImpl<UrlMapper, Url> implements I
             default:
                 throw new Exception("Not support method yet.");
         }
-        System.out.println(requestParams);
         httpHeaders.addAll(requestHeaders);
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestParams, requestHeaders);
         response = restTemplate.exchange(url.toString(), HttpMethod.resolve(method), requestEntity, clazz);

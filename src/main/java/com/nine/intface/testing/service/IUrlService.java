@@ -20,6 +20,6 @@ import java.util.Map;
 public interface IUrlService extends IBaseService<Url> {
 
     <T> T doHanle(String scheme,String method, String host, Integer port, String path,
-                  String file, MultiValueMap<String,String> requestParams, MultiValueMap<String,String> requestHeaders,
-                  MultiValueMap<String,String> requestBodys,Class<T> clazz)throws Exception;
+                  String file, String params, String headers,
+                  String bodys,Class<T> clazz)throws Exception;
 }
