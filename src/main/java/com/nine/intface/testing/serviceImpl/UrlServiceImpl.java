@@ -62,7 +62,7 @@ public class UrlServiceImpl extends BaseServiceImpl<UrlMapper, Url> implements I
         }
         ResponseEntity<T> response;
         HttpHeaders httpHeaders = new HttpHeaders();
-        //如果不传入method ,默认get
+        httpHeaders.addAll(requestHeaders);
         if (StringUtils.isEmpty(method)) {
             method = HttpMethod.GET.name();
         }
@@ -71,7 +71,6 @@ public class UrlServiceImpl extends BaseServiceImpl<UrlMapper, Url> implements I
         StringBuffer url = new StringBuffer();
         url.append(scheme).append("://").append(host).append(":").append(port).append("/")
                 .append(path).append("/").append(file);
-        //  String uri = "http://localhost/interface/users/user";
         switch (method) {
             case MethodConstant.DELETE:
                 break;
@@ -81,9 +80,8 @@ public class UrlServiceImpl extends BaseServiceImpl<UrlMapper, Url> implements I
                     url.append(paramName).append("=").append("{").append(paramName).append("}").append("&");
                 }
                 url.deleteCharAt(url.length() - 1);
-                httpHeaders.addAll(requestHeaders);
                 HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(requestHeaders);
-                response = restTemplate.exchange(url.toString(), HttpMethod.resolve(method), requestEntity, clazz, requestParams);
+                response = restTemplate.exchange(url.toString(), HttpMethod.resolve(method), requestEntity, clazz, mapParams);
                 return response.getBody();
             case MethodConstant.POST:
                 break;
@@ -92,7 +90,6 @@ public class UrlServiceImpl extends BaseServiceImpl<UrlMapper, Url> implements I
             default:
                 throw new Exception("Not support method yet.");
         }
-        httpHeaders.addAll(requestHeaders);
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestParams, requestHeaders);
         response = restTemplate.exchange(url.toString(), HttpMethod.resolve(method), requestEntity, clazz);
         return response.getBody();
