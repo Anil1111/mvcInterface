@@ -1,7 +1,7 @@
 package com.nine.intface.common.exception;
 
 
-import com.nine.intface.common.controller.BaseHandler;
+import com.nine.intface.common.controller.Suger;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
@@ -19,7 +19,7 @@ import java.util.Map;
  * @version : 2018-10-10 13:23
  */
 @Controller
-public class URLExcptionController extends BasicErrorController implements BaseHandler {
+public class URLExcptionController extends BasicErrorController implements Suger {
 
 
     public URLExcptionController(ServerProperties serverProperties) {

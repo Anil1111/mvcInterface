@@ -3,7 +3,6 @@ package com.nine.intface.common.controller;
 import com.nine.intface.common.constants.Constant;
 import com.nine.intface.common.constants.URLConstant;
 import com.nine.intface.common.po.User;
-import com.nine.intface.common.vo.Result;
 import com.nine.intface.common.vo.ResultFactory;
 
 
@@ -17,8 +16,6 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 
 import org.apache.shiro.web.util.WebUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 @Api(value = "/", tags = {"登入登出"})
 @RestController
-public class LoginController implements BaseHandler {
+public class LoginController implements Suger {
 
 
     @Autowired

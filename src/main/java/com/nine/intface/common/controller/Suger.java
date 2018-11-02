@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
 import com.nine.intface.common.vo.Result;
 import com.nine.intface.common.vo.ResultFactory;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.ServletResponse;
@@ -23,7 +24,7 @@ import java.util.Map;
  * @version : 2018-10-10 10:27
  */
 @SuppressWarnings("all")
-public interface BaseHandler {
+public interface Suger {
     default boolean isAjax(HttpServletRequest request) {
         String header = request.getHeader("X-Requested-With");
         if ("XMLHttpRequest".equalsIgnoreCase(header)) {
@@ -55,7 +56,7 @@ public interface BaseHandler {
      * @return String
      */
     default String getIpAddress(HttpServletRequest request) {
-        String ip = request.getRemoteAddr() == null ? "" : request.getRemoteAddr();
+        String ip = request.getRemoteAddr() == null ? Strings.EMPTY : request.getRemoteAddr();
         return "0:0:0:0:0:0:0:1".equals(ip) ? "127.0.0.1" : ip;
     }
 
@@ -98,12 +99,11 @@ public interface BaseHandler {
      *
      * @return
      */
-    default HashMap<String, Object> getRequestMapSingle(HttpServletRequest request) {
-        HashMap<String, Object> conditions = Maps.newHashMap();
-        Map map = request.getParameterMap();
-        for (Object o : map.keySet()) {
-            String key = (String) o;
-            conditions.put(key, ((String[]) map.get(key))[0]);
+    default Map<String, String> getRequestMapSingle(HttpServletRequest request) {
+        Map<String, String> conditions = Maps.newHashMap();
+        Map<String, String[]> map = request.getParameterMap();
+        for (String key : map.keySet()) {
+            conditions.put(key, map.get(key)[0]);
         }
         return conditions;
     }

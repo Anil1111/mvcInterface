@@ -21,7 +21,6 @@ import java.nio.charset.StandardCharsets;
  */
 @Configuration
 public class RestTemplateConfig {
-    private static final Logger logger = LoggerFactory.getLogger(RestTemplateConfig.class);
 
 
     @Bean
@@ -30,12 +29,12 @@ public class RestTemplateConfig {
         RestTemplate restTemplate = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
         // 支持中文编码
         restTemplate.getMessageConverters().set(1, new StringHttpMessageConverter(StandardCharsets.UTF_8));
-        restTemplate.getMessageConverters().set(2,new ResourceHttpMessageConverter(true));
+        restTemplate.getMessageConverters().set(2, new ResourceHttpMessageConverter(true));
         restTemplate.getMessageConverters().add(getFastJsonConverter());
         return restTemplate;
     }
 
-    public FastJsonHttpMessageConverter getFastJsonConverter(){
+    public FastJsonHttpMessageConverter getFastJsonConverter() {
         FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
         FastJsonConfig config = new FastJsonConfig();
         config.setSerializerFeatures(SerializerFeature.WriteMapNullValue);

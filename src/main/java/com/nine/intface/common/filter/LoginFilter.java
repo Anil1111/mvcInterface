@@ -1,9 +1,10 @@
 package com.nine.intface.common.filter;//package com.noob.filter;
 
 import com.nine.intface.common.constants.URLConstant;
-import com.nine.intface.common.controller.BaseHandler;
+import com.nine.intface.common.controller.Suger;
 import com.nine.intface.common.po.User;
 import com.nine.intface.common.vo.ResultFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
@@ -23,8 +24,8 @@ import java.io.IOException;
  * @Description MyFormAuthenticationFilter 自定义session失效跳转页面
  * @Date 2017年9月18日 下午4:48:03
  */
-public class LoginFilter extends FormAuthenticationFilter implements BaseHandler {
-    private static final Logger logger = LoggerFactory.getLogger(LoginFilter.class);
+@Slf4j
+public class LoginFilter extends FormAuthenticationFilter implements Suger {
 
     // session获取
     //CustomShiroSessionDAO customShiroSessionDAO;
@@ -32,6 +33,7 @@ public class LoginFilter extends FormAuthenticationFilter implements BaseHandler
 
     @Override
     protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) throws Exception {
+
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         if(isAjax(req)){

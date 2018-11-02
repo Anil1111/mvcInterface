@@ -1,12 +1,10 @@
 package com.nine.intface.common.serviceImpl;
 
-import com.nine.intface.common.controller.BaseHandler;
+import com.nine.intface.common.controller.Suger;
 import com.nine.intface.common.dao.SysLogMapper;
 import com.nine.intface.common.po.SysLog;
 import com.nine.intface.common.service.ISysLogService;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -22,10 +20,10 @@ import java.util.Map;
  */
 @Slf4j
 @Service
-public class SysLogServiceImpl extends BaseServiceImpl<SysLogMapper, SysLog> implements ISysLogService, BaseHandler {
+public class SysLogServiceImpl extends BaseServiceImpl<SysLogMapper, SysLog> implements ISysLogService, Suger {
 
     @Override
-    public void recordOne(String ip, String operateBy, String operateUrl, String remark, Date createTime) throws Exception {
+    public void recordOne(String ip, String operateBy, String operateUrl, String remark, Date createTime)  {
         SysLog sysLog = new SysLog();
         sysLog.setIp(ip);
         sysLog.setOperateBy(operateBy);
@@ -36,7 +34,7 @@ public class SysLogServiceImpl extends BaseServiceImpl<SysLogMapper, SysLog> imp
     }
 
     @Override
-    public void logOne(String method,String url, Map params,String contentType) throws Exception {
+    public void logOne(String method,String url, Map params,String contentType) {
         log.info("method      : {}",method);
         log.info("contentType : {}",contentType);
         log.info("uri         : {}",url);

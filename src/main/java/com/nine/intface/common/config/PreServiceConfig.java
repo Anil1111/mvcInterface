@@ -1,5 +1,6 @@
 package com.nine.intface.common.config;
 
+import com.nine.intface.common.service.ISysLogService;
 import com.nine.intface.common.service.IUrlFilterService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,5 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class PreServiceConfig {
     @Autowired
     private IUrlFilterService shiroService;
+
 
 }

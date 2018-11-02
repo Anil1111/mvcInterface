@@ -13,7 +13,6 @@ import java.io.Serializable;
  * @version : 2018-10-12 16:13
  */
 public class RubiSessionDao extends MemorySessionDAO {
-    private static final Logger logger = LoggerFactory.getLogger(RubiSessionDao.class);
 
     @Override
     protected Serializable doCreate(Session session) {

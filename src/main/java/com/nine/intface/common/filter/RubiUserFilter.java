@@ -2,8 +2,7 @@ package com.nine.intface.common.filter;
 
 
 import com.nine.intface.common.constants.Constant;
-import com.nine.intface.common.controller.BaseHandler;
-import org.apache.shiro.subject.Subject;
+import com.nine.intface.common.controller.Suger;
 import org.apache.shiro.web.filter.authc.UserFilter;
 
 import org.slf4j.Logger;
@@ -21,8 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author : Rubi
  * @version : 2018-10-07 23:53 下午
  */
-public class RubiUserFilter extends UserFilter implements BaseHandler {
-    private static final Logger logger = LoggerFactory.getLogger(RubiUserFilter.class);
+public class RubiUserFilter extends UserFilter implements Suger {
 
     /**
      * isAccessAllowed：表示是否允许访问；
@@ -31,15 +29,15 @@ public class RubiUserFilter extends UserFilter implements BaseHandler {
      * onAccessDenied：表示当访问拒绝时是否已经处理了；
      * 如果返回true表示需要继续处理；如果返回false表示该拦截器实例已经处理了，将直接返回即可。
      */
-    @Override
-    protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
-        if (isLoginRequest(request, response)) {
-            return true;
-        } else {
-            Subject subject = getSubject(request, response);
-            return subject.getPrincipal() != null;
-        }
-    }
+//    @Override
+//    protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
+//        if (isLoginRequest(request, response)) {
+//            return true;
+//        } else {
+//            Subject subject = getSubject(request, response);
+//            return subject.getPrincipal() != null;
+//        }
+//    }
 
 
     @Override

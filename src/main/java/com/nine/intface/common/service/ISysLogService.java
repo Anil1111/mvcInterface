@@ -25,7 +25,7 @@ public interface ISysLogService extends IBaseService<SysLog> {
      * @param createTime
      * @throws Exception
      */
-    void recordOne(String ip, String operateBy, String operateUrl, String remark, Date createTime) throws Exception;
+    void recordOne(String ip, String operateBy, String operateUrl, String remark, Date createTime) ;
     /**
      * 打印日志到控制台和文件
      * @param method
@@ -33,5 +33,5 @@ public interface ISysLogService extends IBaseService<SysLog> {
      * @param params
      * @throws Exception
      */
-    void logOne(String method,String url, Map params,String contentType)throws Exception;
+    void logOne(String method,String url, Map params,String contentType);
 }

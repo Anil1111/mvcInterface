@@ -13,4 +13,6 @@ public class URLConstant {
     public static final String IP_126NET="http://ip.ws.126.net/ipquery";
     //http://ip-api.com/json/117.148.92.108?lang=zh-CN 就是city是拼音不太好
     public static final String ACTUATOR="actuator";
+
+    public static final String SUFFIXPATTONS ="suffixPattons";
 }

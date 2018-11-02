@@ -29,7 +29,6 @@ import static org.springframework.http.HttpMethod.*;
 @SpringBootTest
 @SuppressWarnings("all")
 public class DemoApplicationTests {
-    private static final Logger logger = LoggerFactory.getLogger(DemoApplicationTests.class);
 
     @Autowired
     private UserMapper userMapper;
@@ -42,9 +41,7 @@ public class DemoApplicationTests {
     private IAsyncTaskService asyncTaskService;
     @Test
     public void contextLoads() throws Exception{
-        String json = restTemplate.getForObject("http://wthrcdn.etouch.cn/weather_mini?city="+"湖州", String.class);
 
-        System.out.println(json);
     }
 
 

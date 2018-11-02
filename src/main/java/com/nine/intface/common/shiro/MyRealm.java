@@ -1,7 +1,6 @@
 package com.nine.intface.common.shiro;
 
 
-
 import com.nine.intface.common.po.Permission;
 import com.nine.intface.common.po.Role;
 import com.nine.intface.common.po.User;
@@ -18,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.util.StringUtils;
 
 import java.util.Set;
 
@@ -183,7 +183,7 @@ public class MyRealm extends AuthorizingRealm {
         Set<Role> roles = userService.getRoles(username);
         if (roles != null && !roles.isEmpty()) {
             for (Role role : roles) {
-                if (role != null && role.getRoleName() != "") {
+                if (role != null && !StringUtils.isEmpty(role.getRoleName())) {
                     info.addRole(role.getRoleName());
                 }
             }
@@ -195,7 +195,7 @@ public class MyRealm extends AuthorizingRealm {
         Set<Permission> permissions = userService.getPermissions(username);
         if (permissions != null && !permissions.isEmpty()) {
             for (Permission permission : permissions) {
-                if (permission != null && permission.getPermissionName() != "") {
+                if (permission != null && !StringUtils.isEmpty(permission.getPermissionName())) {
                     info.addStringPermission(permission.getPermissionName());//添加权限
                 }
             }

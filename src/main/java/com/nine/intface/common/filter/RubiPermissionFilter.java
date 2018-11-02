@@ -4,7 +4,7 @@ package com.nine.intface.common.filter;
 
 
 import com.nine.intface.common.constants.Constant;
-import com.nine.intface.common.controller.BaseHandler;
+import com.nine.intface.common.controller.Suger;
 import org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter;
 
 import org.slf4j.Logger;
@@ -22,11 +22,10 @@ import java.io.IOException;
  * @author : Rubi
  * @version : 2018-10-07 20:35 下午
  */
-public class RubiPermissionFilter extends PermissionsAuthorizationFilter implements BaseHandler {
+public class RubiPermissionFilter extends PermissionsAuthorizationFilter implements Suger {
 
 
-    private static final Logger logger = LoggerFactory.getLogger(RubiPermissionFilter.class);
-    
+
 
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws IOException {
