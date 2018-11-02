@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
@@ -27,10 +28,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author : Rubi
  * @version : 2018-10-10 10:29
  */
+@Slf4j
 @Api(value = "/", tags = {"登入登出"})
 @RestController
 public class LoginController implements BaseHandler {
-    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 
     @Autowired
@@ -112,7 +113,7 @@ public class LoginController implements BaseHandler {
         // 如果登录失败从request中获取认证异常信息，shiroLoginFailure就是shiro异常类的全限定名
         // 根据shiro返回的异常类路径判断，抛出指定异常信息
         //不可缺少
-        logger.info("ajaxlogin");
+        log.info("ajaxlogin");
         String exceptionClassName = (String) request.getAttribute(Constant.SHIRO_LOGIN_FAILURE.getName());
         if (exceptionClassName != null) {
             Exception exception = (Exception) Class.forName(exceptionClassName).newInstance();

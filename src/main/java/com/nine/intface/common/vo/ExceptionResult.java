@@ -20,6 +20,6 @@ public class ExceptionResult extends Result implements Serializable {
         super(code,message);
     }
     public ExceptionResult(int code,Exception e){
-        super(code,e.getClass().getName());
+        super(code,e.toString());
     }
 }

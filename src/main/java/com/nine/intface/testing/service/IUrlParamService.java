@@ -4,6 +4,8 @@ import com.nine.intface.common.service.IBaseService;
 import com.nine.intface.testing.po.UrlParam;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * <p>
  * url,param关系表 服务类
@@ -14,5 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional(rollbackFor = Exception.class)
 public interface IUrlParamService extends IBaseService<UrlParam> {
+
+    List<UrlParam> getParamsByUrlId(int url_id)throws Exception;
 
 }

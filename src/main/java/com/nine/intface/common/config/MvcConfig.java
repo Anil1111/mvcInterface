@@ -2,6 +2,7 @@ package com.nine.intface.common.config;
 
 import com.nine.intface.common.interceptpr.RequestInterceptor;
 import com.nine.intface.common.interceptpr.SystemLogInterceptor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -18,10 +19,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author : Rubi
  * @version : 2018-10-09 10:43
  */
-
+@Slf4j
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
-    private static final Logger logger = LoggerFactory.getLogger(MvcConfig.class);
 
 
 
@@ -55,7 +55,7 @@ public class MvcConfig implements WebMvcConfigurer {
      */
     @Bean
     public SystemLogInterceptor getSystemLogInterceptor() {
-        logger.info("----------------ConfigInit:SystemLogInterceptor");
+        log.info("----------------ConfigInit:SystemLogInterceptor");
         return new SystemLogInterceptor();
     }
     /**
@@ -64,18 +64,18 @@ public class MvcConfig implements WebMvcConfigurer {
      */
     @Bean
     public RequestInterceptor getRequestInterceptor() {
-        logger.info("----------------ConfigInit:RequestInterceptor");
+        log.info("----------------ConfigInit:RequestInterceptor");
         return new RequestInterceptor();
     }
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        logger.info("----------------ConfigInit:DateFormatter");
+        log.info("----------------ConfigInit:DateFormatter");
         registry.addFormatter(new DateFormatter("yyyy-MM-dd HH:mm:ss"));
     }
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        logger.info("----------------ConfigInit:CorsMappings");
+        log.info("----------------ConfigInit:CorsMappings");
         registry.addMapping("/**")
                 .allowedOrigins(CorsConfiguration.ALL)
                 .allowedMethods(CorsConfiguration.ALL)
@@ -87,7 +87,7 @@ public class MvcConfig implements WebMvcConfigurer {
 
     //    @Bean
 //    public HelloService helloService(){
-//       logger.info("create a bean named helloService");
+//       log.info("create a bean named helloService");
 //        return new HelloService();
 //    }
 

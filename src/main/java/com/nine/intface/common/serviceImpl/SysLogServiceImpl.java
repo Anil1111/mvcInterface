@@ -4,6 +4,7 @@ import com.nine.intface.common.controller.BaseHandler;
 import com.nine.intface.common.dao.SysLogMapper;
 import com.nine.intface.common.po.SysLog;
 import com.nine.intface.common.service.ISysLogService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,9 @@ import java.util.Map;
  * @author Rubi
  * @since 2018-10-17
  */
+@Slf4j
 @Service
 public class SysLogServiceImpl extends BaseServiceImpl<SysLogMapper, SysLog> implements ISysLogService, BaseHandler {
-    private static final Logger logger = LoggerFactory.getLogger(SysLogServiceImpl.class);
 
     @Override
     public void recordOne(String ip, String operateBy, String operateUrl, String remark, Date createTime) throws Exception {
@@ -35,9 +36,10 @@ public class SysLogServiceImpl extends BaseServiceImpl<SysLogMapper, SysLog> imp
     }
 
     @Override
-    public void logOne(String method,String url, Map params) throws Exception {
-        logger.info("method : {}",method);
-        logger.info("uri    : {}",url);
-        logger.info("params : {}",params);
+    public void logOne(String method,String url, Map params,String contentType) throws Exception {
+        log.info("method      : {}",method);
+        log.info("contentType : {}",contentType);
+        log.info("uri         : {}",url);
+        log.info("params      : {}",params);
     }
 }

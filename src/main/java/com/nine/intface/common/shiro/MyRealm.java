@@ -6,6 +6,7 @@ import com.nine.intface.common.po.Permission;
 import com.nine.intface.common.po.Role;
 import com.nine.intface.common.po.User;
 import com.nine.intface.common.service.IUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -37,9 +38,9 @@ import java.util.Set;
  * SecurityUtils.getSubject().isPermitted（），
  * 从而区调用doGetAuthorizationInfo 匹配
  */
+@Slf4j
 @Cacheable
 public class MyRealm extends AuthorizingRealm {
-    private static final Logger logger = LoggerFactory.getLogger(MyRealm.class);
 
     @Autowired
     private CachingSessionDAO sessionDAO;
@@ -55,7 +56,7 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
 
-        logger.info("doGetAuthenticationInfo");
+        log.info("doGetAuthenticationInfo");
         //clearCache();
         /**
          * 因为会调用两边login...
@@ -77,15 +78,15 @@ public class MyRealm extends AuthorizingRealm {
          */
 
 
-        //logger.info(ReflectionToStringBuilder.toString(authcToken));
+        //log.info(ReflectionToStringBuilder.toString(authcToken));
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-        // logger.info(authcToken.getPrincipal());//身份
+        // log.info(authcToken.getPrincipal());//身份
 
         User user = null;
         try {
             user = userService.getByUsername(token.getUsername());
         } catch (Exception e) {
-            logger.error("exception:{} info: ", e.getClass().getName(), e);
+            log.error("exception:{} info: ", e.getClass().getName(), e);
         }
         if (null == user) {
             return null;
@@ -98,7 +99,7 @@ public class MyRealm extends AuthorizingRealm {
 //            if(token.getUsername().equals(String.valueOf(session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY)))){
 //
 //                session.setTimeout(0);//设置session立即失效，即将其踢出系统
-//                logger.info("用户{}已登录，踢出之前session",token.getUsername());
+//                log.info("用户{}已登录，踢出之前session",token.getUsername());
 //                break;
 //
 //            }
@@ -109,12 +110,12 @@ public class MyRealm extends AuthorizingRealm {
         AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(user, user.getPassword(), getName());
 
 
-           /* logger.info("1");
+           /* log.info("1");
             PrincipalCollection principalCollection= SecurityUtils.getSubject().getPrincipals();
-            logger.info("1");
+            log.info("1");
             System.out.println(ReflectionToStringBuilder.toString(principalCollection));
             doGetAuthorizationInfo(principalCollection);
-            logger.info("1");*/
+            log.info("1");*/
         //  System.out.println(ReflectionToStringBuilder.toString(authcInfo));
 
 
@@ -137,7 +138,7 @@ public class MyRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        logger.info("doGetAuthorizationInfo");
+        log.info("doGetAuthorizationInfo");
         //获取当前登录的用户名
 //        getAvailablePrincipal(principals)
         String username = ((User) principals.getPrimaryPrincipal()).getUsername();
@@ -155,7 +156,7 @@ public class MyRealm extends AuthorizingRealm {
             //throw new NullPointerException();
             return simpleAuthorInfo;
         } catch (Exception e) {
-            logger.warn("{} has an Exception {}", getName(), e);
+            log.warn("{} has an Exception {}", getName(), e);
         }
 
         return null;

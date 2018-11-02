@@ -33,32 +33,32 @@ public class RubiSessionDao extends MemorySessionDAO {
 //
 //    @Override
 //    protected Serializable doCreate(Session session) {
-//        logger.info("doCreate");
+//        log.info("doCreate");
 //
 //        return super.create(session);
 //    }
 //
 //    @Override
 //    protected Session doReadSession(Serializable sessionId) {
-//        logger.info("doReadSession");
+//        log.info("doReadSession");
 //        return super.readSession(sessionId);
 //    }
 //
 ////    @Override
 ////    public Collection<Session> getActiveSessions() {
-////        logger.info("getActiveSessions");
+////        log.info("getActiveSessions");
 ////        return super.getActiveSessions();
 ////    }
 //
 //    @Override
 //    protected void doUpdate(Session session) {
-//        logger.info("doUpdate");
+//        log.info("doUpdate");
 //        super.update(session);
 //    }
 //
 //    @Override
 //    protected void doDelete(Session session) {
-//        logger.info("doDelete");
+//        log.info("doDelete");
 //        super.delete(session);
 //    }
 }

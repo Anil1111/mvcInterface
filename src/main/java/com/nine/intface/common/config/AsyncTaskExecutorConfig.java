@@ -1,5 +1,6 @@
 package com.nine.intface.common.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -17,15 +18,15 @@ import java.util.concurrent.Executor;
 
 //@EnableAsync(proxyTargetClass = true)
 //@ComponentScan("com.nine.intface.common.tasks")
+@Slf4j
 @Configuration
 @EnableAsync
 public class AsyncTaskExecutorConfig {
-    private static final Logger logger = LoggerFactory.getLogger(AsyncTaskExecutorConfig.class);
 
 
     @Bean
     public Executor logExecutor() {
-        logger.info("----------------ConfigInit:logExecutor");
+        log.info("----------------ConfigInit:logExecutor");
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         taskExecutor.setBeanName("logExecutor");
         //核心线程数

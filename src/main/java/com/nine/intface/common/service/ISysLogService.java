@@ -33,5 +33,5 @@ public interface ISysLogService extends IBaseService<SysLog> {
      * @param params
      * @throws Exception
      */
-    void logOne(String method,String url, Map params)throws Exception;
+    void logOne(String method,String url, Map params,String contentType)throws Exception;
 }

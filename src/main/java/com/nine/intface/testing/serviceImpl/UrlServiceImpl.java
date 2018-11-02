@@ -7,20 +7,20 @@ import com.nine.intface.common.serviceImpl.BaseServiceImpl;
 import com.nine.intface.testing.dao.UrlMapper;
 import com.nine.intface.testing.po.Url;
 import com.nine.intface.testing.service.IUrlService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,6 +31,7 @@ import java.util.Map;
  * @author Rubi
  * @since 2018-10-23
  */
+@Slf4j
 @Service
 public class UrlServiceImpl extends BaseServiceImpl<UrlMapper, Url> implements IUrlService {
 
@@ -45,6 +46,7 @@ public class UrlServiceImpl extends BaseServiceImpl<UrlMapper, Url> implements I
     public <T> T doHanle(String scheme, String method, String host, Integer port, String path, String file,
                          String params, String headers,
                          String bodys, Class<T> clazz) throws Exception {
+//        boolean
         Map<String, String> mapBodys = JSON.parseObject(bodys, Map.class);
         MultiValueMap<String, String> requestBodys = new LinkedMultiValueMap<>();
         for (Map.Entry<String, String> entry : mapBodys.entrySet()) {
@@ -63,23 +65,25 @@ public class UrlServiceImpl extends BaseServiceImpl<UrlMapper, Url> implements I
         ResponseEntity<T> response;
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.addAll(requestHeaders);
-        if (StringUtils.isEmpty(method)) {
-            method = HttpMethod.GET.name();
-        }
-        method = method.toUpperCase();
-        port = port != null && port != 0 ? port : 80;
+        scheme = StringUtils.isEmpty(scheme) ? "http" : scheme;
+        host = StringUtils.isEmpty(headers) ? "127.0.0.1" : host;
+        method = StringUtils.isEmpty(method) ? HttpMethod.GET.name() : method.toUpperCase();
+        path = StringUtils.isEmpty(path) ? Strings.EMPTY : "/"+path;
+        file = StringUtils.isEmpty(file) ? Strings.EMPTY : file;
+        port = port != null && port <= 0 ? 80 : port;
+
         StringBuffer url = new StringBuffer();
-        url.append(scheme).append("://").append(host).append(":").append(port).append("/")
-                .append(path).append("/").append(file);
+        url.append(scheme).append("://")
+                .append(host).append(":").append(port).append(path).append("/").append(file).append("?");
+        for (String paramName : requestParams.keySet()) {
+            url.append(paramName).append("={").append(paramName).append("}&");
+        }
+        url.deleteCharAt(url.length() - 1);
+        log.info("complete url: {}",url);
         switch (method) {
             case MethodConstant.DELETE:
                 break;
             case MethodConstant.GET:
-                url.append("?");
-                for (String paramName : requestParams.keySet()) {
-                    url.append(paramName).append("=").append("{").append(paramName).append("}").append("&");
-                }
-                url.deleteCharAt(url.length() - 1);
                 HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(requestHeaders);
                 response = restTemplate.exchange(url.toString(), HttpMethod.resolve(method), requestEntity, clazz, mapParams);
                 return response.getBody();
@@ -88,10 +92,12 @@ public class UrlServiceImpl extends BaseServiceImpl<UrlMapper, Url> implements I
             case MethodConstant.PUT:
                 break;
             default:
-                throw new Exception("Not support method yet.");
+                throw new HttpRequestMethodNotSupportedException(method);
         }
-        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestParams, requestHeaders);
-        response = restTemplate.exchange(url.toString(), HttpMethod.resolve(method), requestEntity, clazz);
+        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestBodys, requestHeaders);
+//        response = restTemplate.exchange(url.toString(), HttpMethod.resolve(method), requestEntity, clazz);
+        response = restTemplate.exchange(url.toString(), HttpMethod.resolve(method), requestEntity, clazz, mapParams);
+
         return response.getBody();
     }
 }

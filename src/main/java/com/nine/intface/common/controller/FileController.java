@@ -2,6 +2,7 @@ package com.nine.intface.common.controller;
 
 import com.nine.intface.common.vo.Result;
 import com.nine.intface.common.vo.ResultFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,12 +17,10 @@ import java.io.File;
  * @author : Rubi
  * @version : 2018-10-26 14:47
  */
-
+@Slf4j
 @Controller
 @RequestMapping("/files")
 public class FileController {
-
-    private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 
     @Value("${rubi.file.upload.folder}")
     private String UPLOAD_FOLDER;
@@ -33,7 +32,7 @@ public class FileController {
     @PostMapping("/upload")
     public String fileUpload(@RequestParam MultipartFile file,Model model) throws Exception {
         Result result;
-        logger.info("{}-->{}",file.getOriginalFilename(),file.getSize());
+        log.info("{}-->{}",file.getOriginalFilename(),file.getSize());
         File dest = new File(UPLOAD_FOLDER  + file.getOriginalFilename());
         if (!dest.getParentFile().exists()) { //判断文件父目录是否存在
             dest.getParentFile().mkdirs();

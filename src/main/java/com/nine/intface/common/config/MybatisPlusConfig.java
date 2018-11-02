@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.annotation.MapperScan;
@@ -30,12 +31,12 @@ import java.util.Properties;
  * @author : Rubi
  * @version : 2018-10-09 16:21
  */
+@Slf4j
 @Configuration
 @EnableTransactionManagement
 @MapperScan("com.nine.intface.*.dao")
 public class MybatisPlusConfig  implements TransactionManagementConfigurer {
-    private static final Logger logger = LoggerFactory.getLogger(MybatisPlusConfig.class);
-    
+
     @Autowired
     private DataSource dataSource;
 
@@ -63,7 +64,7 @@ public class MybatisPlusConfig  implements TransactionManagementConfigurer {
 
     /*@Bean*/
     public PaginationInterceptor paginationInterceptor() {
-        logger.info("----------------ConfigInit:paginationInterceptor");
+        log.info("----------------ConfigInit:paginationInterceptor");
         PaginationInterceptor interceptor=   new PaginationInterceptor();
 //        interceptor.setOverflow(true);
         return interceptor;
@@ -75,7 +76,7 @@ public class MybatisPlusConfig  implements TransactionManagementConfigurer {
 
 
 
-        logger.info("----------------ConfigInit:sqlSessionFactory");
+        log.info("----------------ConfigInit:sqlSessionFactory");
 
         MybatisSqlSessionFactoryBean mybatisPlus = new MybatisSqlSessionFactoryBean();
         mybatisPlus.setDataSource(dataSource);
@@ -119,7 +120,7 @@ public class MybatisPlusConfig  implements TransactionManagementConfigurer {
     @Bean
     @Override
     public PlatformTransactionManager annotationDrivenTransactionManager() {
-        logger.info("----------------ConfigInit:annotationDrivenTransactionManager");
+        log.info("----------------ConfigInit:annotationDrivenTransactionManager");
         return new DataSourceTransactionManager(dataSource);
     }
 

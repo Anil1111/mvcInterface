@@ -11,9 +11,9 @@ import java.util.Map;
  */
 
 public interface IAsyncTaskService {
-    @Async
-    void logOne(String method,String url, Map params)throws Exception;
-    @Async
-    void recordOne(String ip, String operateBy, String operateUrl, String remark, Date createTime)throws Exception;
+//    @Async
+//    void logOne(String method,String url, Map params)throws Exception;
+//    @Async
+//    void recordOne(String ip, String operateBy, String operateUrl, String remark, Date createTime)throws Exception;
 
 }

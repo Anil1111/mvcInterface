@@ -5,6 +5,7 @@ import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.google.common.collect.Maps;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -20,20 +21,20 @@ import java.util.Map;
  * @author : Rubi
  * @version : 2018-10-09 16:36
  */
+@Slf4j
 @Configuration
 public class DruidConfig {
-    private static final Logger logger = LoggerFactory.getLogger(DruidConfig.class);
-    
+
     @Bean(name = "dataSource")
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource(){
-        logger.info("----------------ConfigInit:dataSource");
+        log.info("----------------ConfigInit:dataSource");
         return new DruidDataSource();
     }
 
     @Bean
     public ServletRegistrationBean statServlet(){
-        logger.info("----------------ConfigInit:ServletRegistrationBean");
+        log.info("----------------ConfigInit:ServletRegistrationBean");
         ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(),"/druid/*");
         Map<String,String> initMap = Maps.newHashMap();
         initMap.put("loginUsername","rubi");
@@ -47,7 +48,7 @@ public class DruidConfig {
 
     @Bean
     public FilterRegistrationBean statFilter(){
-        logger.info("----------------ConfigInit:FilterRegistrationBean");
+        log.info("----------------ConfigInit:FilterRegistrationBean");
 
         //创建过滤器
         FilterRegistrationBean bean = new FilterRegistrationBean(new WebStatFilter());

@@ -1,11 +1,9 @@
 package com.nine.intface.common.filter;
 
-import com.nine.intface.common.config.SpringUtils;
 import com.nine.intface.common.constants.Constant;
-import com.nine.intface.common.constants.URLConstant;
 import com.nine.intface.common.controller.BaseHandler;
 import com.nine.intface.common.service.ISysLogService;
-import org.apache.logging.log4j.util.Strings;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.web.filter.authz.RolesAuthorizationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,17 +15,14 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
-import java.util.Date;
 
 
 /**
  * @author : Rubi
  * @version : 2018-10-07 20:04 下午
  */
+@Slf4j
 public class RubiRoleFilter extends RolesAuthorizationFilter implements BaseHandler {
-    private static final Logger logger = LoggerFactory.getLogger(RubiRoleFilter.class);
 
     private ISysLogService sysLogService;
 
@@ -37,26 +32,26 @@ public class RubiRoleFilter extends RolesAuthorizationFilter implements BaseHand
     public boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws IOException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
-        if(req.getRequestURI().contains(URLConstant.ACTUATOR)){
-
-            if(sysLogService == null){
-                sysLogService =SpringUtils.getBean(ISysLogService.class);
-            }
-            /**
-             * 因为 actuator  以及子地址都不会被拦截器拦截， 所以专门用过滤器打印 改日志
-             */
-            try {
-                sysLogService.recordOne(
-                        getIpAddress(req),req.getHeader("User-Agent"),
-                        URLDecoder.decode(req.getRequestURI(), StandardCharsets.UTF_8.name()),Strings.EMPTY,new Date());
-                sysLogService.logOne(
-                        req.getMethod(),
-                        URLDecoder.decode(req.getRequestURI(), StandardCharsets.UTF_8.name())
-                        ,this.getRequestMapSingle(req));
-            } catch (Exception e) {
-                logger.warn("filter failed record mysql :{}",e.getClass().getName());
-            }
-        }
+//        if(req.getRequestURI().contains(URLConstant.ACTUATOR)){
+//
+//            if(sysLogService == null){
+//                sysLogService =SpringUtils.getBean(ISysLogService.class);
+//            }
+//            /**
+//             * 因为 actuator  以及子地址都不会被拦截器拦截， 所以专门用过滤器打印 改日志
+//             */
+//            try {
+//                sysLogService.recordOne(
+//                        getIpAddress(req),req.getHeader("User-Agent"),
+//                        URLDecoder.decode(req.getRequestURI(), StandardCharsets.UTF_8.name()),Strings.EMPTY,new Date());
+//                sysLogService.logOne(
+//                        req.getMethod(),
+//                        URLDecoder.decode(req.getRequestURI(), StandardCharsets.UTF_8.name())
+//                        ,this.getRequestMapSingle(req));
+//            } catch (Exception e) {
+//                log.warn("filter failed record mysql :{}",e.getClass().getName());
+//            }
+//        }
         return super.isAccessAllowed(request, response, mappedValue);
     }
 

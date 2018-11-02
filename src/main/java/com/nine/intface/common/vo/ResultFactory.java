@@ -4,6 +4,7 @@ package com.nine.intface.common.vo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.nine.intface.common.constants.Constant;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,17 +14,17 @@ import java.util.List;
  * @author : Rubi
  * @version : 2018-10-09 23:23 下午
  */
+@Slf4j
 public class ResultFactory {
-    private static Logger logger = LoggerFactory.getLogger(ResultFactory.class);
 
     public static void simpleLog(Result result) {
-        logger.info("result :{}", result);
+        log.info("result :{}", result);
     }
 
     public static void pageLog(RestResult result) {
-        logger.info("result :{}", result);
-        logger.info("record :{}", ((Page) result.getData()).getRecords());
-        logger.info("current :{},total :{},size :{}",
+        log.info("result :{}", result);
+        log.info("record :{}", ((Page) result.getData()).getRecords());
+        log.info("current :{},total :{},size :{}",
                 ((Page) result.getData()).getCurrent(),
                 ((Page) result.getData()).getTotal(),
                 ((Page) result.getData()).getSize());
@@ -92,7 +93,7 @@ public class ResultFactory {
     }
 
     public static ExceptionResult getOtherExceptionResult(Exception e) {
-        ExceptionResult result = new ExceptionResult(Constant.EXCEPTION_OTHER.getIndex(), e + e.getMessage());
+        ExceptionResult result = new ExceptionResult(Constant.EXCEPTION_OTHER.getIndex(), e);
         simpleLog(result);
         return result;
     }

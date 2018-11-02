@@ -3,6 +3,7 @@ package com.nine.intface.common.interceptpr;
 
 import com.nine.intface.common.controller.BaseHandler;
 import com.nine.intface.common.service.ISysLogService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,8 +22,8 @@ import java.util.Date;
  * @author : Rubi
  * @version : 2018-10-10 15:45
  */
+@Slf4j
 public class SystemLogInterceptor implements HandlerInterceptor,BaseHandler {
-    private static final Logger logger = LoggerFactory.getLogger(SystemLogInterceptor.class);
 
     @Autowired
     private ISysLogService sysLogService;

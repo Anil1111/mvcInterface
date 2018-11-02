@@ -11,6 +11,7 @@ import com.nine.intface.common.po.UrlFilter;
 import com.nine.intface.common.service.IUrlFilterService;
 import com.nine.intface.common.shiro.MyRealm;
 import com.nine.intface.common.shiro.RetryLimitHashedCredentialsMatcher;
+import lombok.extern.slf4j.Slf4j;
 import net.sf.ehcache.CacheManager;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
@@ -48,11 +49,10 @@ import java.util.Map;
  * @author : Rubi
  * @version : 2018-10-09 17:21
  */
-
+@Slf4j
 @Configuration
 //@DependsOn({"shiroUrlFilterService"})
 public class ShiroConfig {
-    private static final Logger logger = LoggerFactory.getLogger(ShiroConfig.class);
 
     @Bean
     public PreServiceConfig getService(){
@@ -75,7 +75,7 @@ public class ShiroConfig {
 
     @Bean(name = "sessionIdCookie")
     public SimpleCookie sessionIdCookie() {
-        logger.info("----------------ConfigInit:sessionIdCookie");
+        log.info("----------------ConfigInit:sessionIdCookie");
         SimpleCookie sessionIdCookie = new SimpleCookie("sid");
         sessionIdCookie.setHttpOnly(true);
         sessionIdCookie.setMaxAge(180000);
@@ -84,7 +84,7 @@ public class ShiroConfig {
 
 //    @Bean(name = "sessionDAO")
 //    public SessionDAO sessionDAO(JavaUuidSessionIdGenerator sessionIdGenerator) {
-//        logger.info("----------------ConfigInit:sessionDAO");
+//        log.info("----------------ConfigInit:sessionDAO");
 //        RubiSessionDao sessionDAO = new RubiSessionDao();
 //        sessionDAO.setActiveSessionsCacheName("shiro-activeSessionCache");
 //        sessionDAO.setSessionIdGenerator(sessionIdGenerator);
@@ -93,7 +93,7 @@ public class ShiroConfig {
     //EnterpriseCacheSessionDAO
     @Bean(name = "sessionDAO")
     public CachingSessionDAO sessionDAO(JavaUuidSessionIdGenerator sessionIdGenerator, EhCacheManager shiroCacheManager) {
-        logger.info("----------------ConfigInit:sessionDAO");
+        log.info("----------------ConfigInit:sessionDAO");
         CachingSessionDAO sessionDAO = new EnterpriseCacheSessionDAO();
         sessionDAO.setActiveSessionsCacheName("shiro-activeSessionCache");
         sessionDAO.setCacheManager(shiroCacheManager);
@@ -103,14 +103,14 @@ public class ShiroConfig {
 
     @Bean(name = "sessionIdGenerator")
     public JavaUuidSessionIdGenerator sessionIdGenerator() {
-        logger.info("----------------ConfigInit:sessionIdGenerator");
+        log.info("----------------ConfigInit:sessionIdGenerator");
         return new JavaUuidSessionIdGenerator();
     }
 
     //    @Lazy
 //    @Bean(name = "sessionValidationScheduler")
 //    public ExecutorServiceSessionValidationScheduler sessionValidationScheduler(ValidatingSessionManager sessionManager) {
-//        logger.info("----------------ConfigInit:sessionValidationScheduler");
+//        log.info("----------------ConfigInit:sessionValidationScheduler");
 //        ExecutorServiceSessionValidationScheduler serviceSessionValidationScheduler = new ExecutorServiceSessionValidationScheduler();
 //        serviceSessionValidationScheduler.setInterval(3000000);
 //        serviceSessionValidationScheduler.setSessionManager(sessionManager);
@@ -119,7 +119,7 @@ public class ShiroConfig {
     @Lazy
     @Bean(name = "sessionValidationScheduler")
     public SessionValidationScheduler sessionValidationScheduler(ValidatingSessionManager sessionManager) {
-        logger.info("----------------ConfigInit:sessionValidationScheduler");
+        log.info("----------------ConfigInit:sessionValidationScheduler");
         QuartzSessionValidationScheduler serviceSessionValidationScheduler = new QuartzSessionValidationScheduler();
         serviceSessionValidationScheduler.setSessionValidationInterval(3000000);
         serviceSessionValidationScheduler.setSessionManager(sessionManager);
@@ -132,7 +132,7 @@ public class ShiroConfig {
             SessionValidationScheduler sessionValidationScheduler,
             SessionDAO sessionDAO,
             SimpleCookie sessionIdCookie) {
-        logger.info("----------------ConfigInit:sessionManager");
+        log.info("----------------ConfigInit:sessionManager");
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
 //        RubiSessionManager
         sessionManager.setSessionIdUrlRewritingEnabled(false);
@@ -148,7 +148,7 @@ public class ShiroConfig {
 
     @Bean(name = "methodInvoking")
     public MethodInvokingFactoryBean methodInvoking(SecurityManager securityManager) {
-        logger.info("----------------ConfigInit:methodInvoking");
+        log.info("----------------ConfigInit:methodInvoking");
         MethodInvokingFactoryBean methodInvoking = new MethodInvokingFactoryBean();
         methodInvoking.setStaticMethod("org.apache.shiro.SecurityUtils.setSecurityManager");
         methodInvoking.setArguments(securityManager);
@@ -157,7 +157,7 @@ public class ShiroConfig {
 
     @Bean(name = "rememberMeManager")
     public CookieRememberMeManager rememberMeManager(SimpleCookie rememberMeCookie) {
-        logger.info("----------------ConfigInit:rememberMeManager");
+        log.info("----------------ConfigInit:rememberMeManager");
         CookieRememberMeManager rememberMeManager = new CookieRememberMeManager();
         rememberMeManager.setCookie(rememberMeCookie);
         return rememberMeManager;
@@ -165,7 +165,7 @@ public class ShiroConfig {
 
     @Bean(name = "rememberMeCookie")
     public SimpleCookie rememberMeCookie() {
-        logger.info("----------------ConfigInit:rememberMeCookie");
+        log.info("----------------ConfigInit:rememberMeCookie");
         SimpleCookie rememberMeCookie = new SimpleCookie("rememberMe");
         rememberMeCookie.setMaxAge(86400);
         return rememberMeCookie;
@@ -174,7 +174,7 @@ public class ShiroConfig {
     //缓存配置
     @Bean(name = "ehcacheManagerFactory")
     public EhCacheManagerFactoryBean ehCacheManager() {
-        logger.info("----------------ConfigInit:ehcacheManagerFactory");
+        log.info("----------------ConfigInit:ehcacheManagerFactory");
         EhCacheManagerFactoryBean ehCacheManagerFactoryBean = new EhCacheManagerFactoryBean();
         ehCacheManagerFactoryBean.setShared(true);
         ehCacheManagerFactoryBean.setConfigLocation(new ClassPathResource("ehcache/ehcache.xml"));
@@ -183,7 +183,7 @@ public class ShiroConfig {
     //spring 封装ehcache缓存管理器
     @Bean(name = "cacheManager")
     public EhCacheCacheManager cacheManager(CacheManager ehcacheManagerFactory) {
-        logger.info("----------------ConfigInit:cacheManager");
+        log.info("----------------ConfigInit:cacheManager");
         EhCacheCacheManager cacheManager = new EhCacheCacheManager();
         cacheManager.setCacheManager(ehcacheManagerFactory);
         return cacheManager;
@@ -191,7 +191,7 @@ public class ShiroConfig {
     //shiro封装cacheManager
     @Bean(name = "shiroCacheManager")
     public EhCacheManager shiroCacheManager(CacheManager ehcacheManagerFactory) {
-        logger.info("----------------ConfigInit:shiroCacheManager");
+        log.info("----------------ConfigInit:shiroCacheManager");
         EhCacheManager shiroCacheManager = new EhCacheManager();
 
         shiroCacheManager.setCacheManager(ehcacheManagerFactory);
@@ -200,7 +200,7 @@ public class ShiroConfig {
 
     @Bean(name = "credentialsMatcher")
     public RetryLimitHashedCredentialsMatcher credentialsMatcher(EhCacheManager shiroCacheManager) {
-        logger.info("----------------ConfigInit:credentialsMatcher");
+        log.info("----------------ConfigInit:credentialsMatcher");
         RetryLimitHashedCredentialsMatcher matcher = new RetryLimitHashedCredentialsMatcher(shiroCacheManager);
         matcher.setHashAlgorithmName("MD5");
         matcher.setHashIterations(9);
@@ -214,7 +214,7 @@ public class ShiroConfig {
 
     @Bean(name = "myRealm")
     public MyRealm myRealm(CredentialsMatcher credentialsMatcher) {
-        logger.info("----------------ConfigInit:myRealm");
+        log.info("----------------ConfigInit:myRealm");
         MyRealm myRealm = new MyRealm();
         myRealm.setCredentialsMatcher(credentialsMatcher);
         myRealm.setAuthenticationCacheName("authenticationCache");
@@ -228,7 +228,7 @@ public class ShiroConfig {
 
     @Bean(name = "securityManager")
     public SecurityManager securityManager(MyRealm myRealm, EhCacheManager shiroCacheManager) {
-        logger.info("----------------ConfigInit:securityManager");
+        log.info("----------------ConfigInit:securityManager");
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(myRealm);
         securityManager.setCacheManager(shiroCacheManager);
@@ -244,7 +244,7 @@ public class ShiroConfig {
             IUrlFilterService shiroService
     ) throws Exception {
 
-        logger.info("----------------ConfigInit:shiroFilter");
+        log.info("----------------ConfigInit:shiroFilter");
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         Map<String, Filter> filterMap = Maps.newHashMap();
@@ -256,7 +256,7 @@ public class ShiroConfig {
         Map<String, String> urlMap = Maps.newLinkedHashMap();
         for (UrlFilter urlAndFilter : list) {
             urlMap.put(urlAndFilter.getUri(), urlAndFilter.getFilter());
-            logger.info("----------------urlAndFilter:{} : {}", Strings.padEnd(urlAndFilter.getUri(), 40, ' '), urlAndFilter.getFilter());
+            log.info("----------------urlAndFilter:{} : {}", Strings.padEnd(urlAndFilter.getUri(), 40, ' '), urlAndFilter.getFilter());
         }
 
 
@@ -271,7 +271,7 @@ public class ShiroConfig {
     //加入注解的使用，不加入这个注解不生效
     @Bean(name = "authorizationAttributeSourceAdvisor")
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
-        logger.info("----------------ConfigInit:authorizationAttributeSourceAdvisor");
+        log.info("----------------ConfigInit:authorizationAttributeSourceAdvisor");
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
@@ -279,13 +279,13 @@ public class ShiroConfig {
 
     @Bean(name = "lifecycleBeanPostProcessor")
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
-        logger.info("----------------ConfigInit:lifecycleBeanPostProcessor");
+        log.info("----------------ConfigInit:lifecycleBeanPostProcessor");
         return new LifecycleBeanPostProcessor();
     }
 
     @Bean(name = "defaultAdvisorAutoProxyCreator")
     public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
-        logger.info("----------------ConfigInit:defaultAdvisorAutoProxyCreator");
+        log.info("----------------ConfigInit:defaultAdvisorAutoProxyCreator");
         DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
         defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
         return defaultAdvisorAutoProxyCreator;

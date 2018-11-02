@@ -3,6 +3,8 @@ package com.nine.intface.common.interceptpr;
 
 import com.nine.intface.common.controller.BaseHandler;
 import com.nine.intface.common.service.ISysLogService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 
 /**
@@ -20,8 +25,8 @@ import java.nio.charset.StandardCharsets;
  * @author : Rubi
  * @version : 2018-10-10 15:59
  */
+@Slf4j
 public class RequestInterceptor implements HandlerInterceptor,BaseHandler {
-    private static final Logger logger = LoggerFactory.getLogger(RequestInterceptor.class);
     @Autowired
     private ISysLogService sysLogService;
 
@@ -37,10 +42,18 @@ public class RequestInterceptor implements HandlerInterceptor,BaseHandler {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        sysLogService.logOne(
-                request.getMethod(),
-                URLDecoder.decode(request.getRequestURI(), StandardCharsets.UTF_8.name())
-                ,this.getRequestMapSingle(request));
+        String method = request.getMethod();
+        String uri = URLDecoder.decode(request.getRequestURI(), StandardCharsets.UTF_8.name());
+        Map params = this.getRequestMapSingle(request);
+        String contentType = request.getContentType();
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()));
+//        StringBuffer body = new StringBuffer();
+//        String line = " ";
+//        while ((line = reader.readLine()) != null){
+//            body.append(line);
+//        }
+//        reader.close();
+        sysLogService.logOne(method,uri,params,contentType);
         return true;
     }
 

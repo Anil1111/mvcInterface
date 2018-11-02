@@ -4,6 +4,7 @@ package com.nine.intface.common.exception;
 import com.nine.intface.common.constants.Constant;
 import com.nine.intface.common.vo.Result;
 import com.nine.intface.common.vo.ResultFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.pam.UnsupportedTokenException;
 import org.apache.shiro.authz.AuthorizationException;
@@ -27,9 +28,9 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
+@Slf4j
 @RestControllerAdvice
 public class ExceptionResolver {
-	private static final Logger logger = LoggerFactory.getLogger(ExceptionResolver.class);
 
 	@Value("${rubi.exception.doLog}")
 	private boolean doLog;
@@ -106,9 +107,9 @@ public class ExceptionResolver {
 		} else {
             result =ResultFactory.getOtherExceptionResult(ex);
 		}
-		logger.warn("异常[{}]",ex.getClass().getName());
+		log.warn("异常[{}]",ex.getClass().getName());
 		if (doLog){
-			logger.warn("栈堆信息:",ex);
+			log.warn("栈堆信息:",ex);
 		}
 		return result;
 	}
