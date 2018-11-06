@@ -15,7 +15,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Map;
 
-
+/**
+ * @author : Rubi
+ * @version : 2018-11-01 17:03 下午
+ */
 @Slf4j
 public class LogFilter implements Filter, Suger {
 
