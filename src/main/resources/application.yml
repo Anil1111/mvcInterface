@@ -59,12 +59,12 @@ logging:
     org.apache.catalina: error
     org.apache.shiro.cache: error
     springfox.documentation.spring.web: error
-  path: C:\Users\Administrator\Desktop\
+  path: ./log/
   file:
     max-size: 20MB
   pattern:
-#    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
     console: "%d{yyyy-MM-dd HH:mm:ss}[%t:%r][%p][%logger]-[%msg%n"
+
   endpoints:
     web:
       exposure:

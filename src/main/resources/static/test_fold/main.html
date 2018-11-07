@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -34,100 +34,100 @@
             <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
         </form>-->
 
+        <script>
+
+            $("a.logout").click(function () {
+                //获取当前网址，如： http://localhost:8083/myproj/view/my.jsp
+
+
+                $.ajax({
+                    type: 'post',
+                    //url: 'develop_user/user.do',
+                    url: path + 'logout',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    /* data: {
+                         username:username,
+                         password:password,
+                         rememberMe:false,
+                         action:action_l
+                     },*/
+                    success: function (data) {
+                        if (data.code === 1) {
+                            //window.location.href = realPath + '/';
+                            //alert("ok");
+                        } else {
+                            alert(data.message);
+                        }
+                    },
+                    error: function (data) {
+                        alert("unknown error");
+                        return false;
+                    }
+
+                });
+            });
+
+            $("a.get").click(function () {
+                //获取当前网址，如： http://localhost:8083/myproj/view/my.jsp
+
+
+                $.ajax({
+                    type: 'get',
+                    //url: 'develop_user/user.do',
+                    url: path + 'develop_user/users',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    /* data: {
+                         username:username,
+                         password:password,
+                         rememberMe:false,sssssss
+                         action:action_l
+                     },*/
+                    success: function (data) {
+                        //alert("code:"+data.code+"|"+"message"+data.message);
+                    },
+                    error: function (data) {
+                        alert("unknown error");
+                        return false;
+                    }
+
+                });
+            });
+            $("a.query").click(function () {
+                //获取当前网址，如： http://localhost:8083/myproj/view/my.jsp
+
+
+                $.ajax({
+                    type: 'post',
+                    //url: 'develop_user/user.do',
+                    url: path + 'develop_user/users',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    /* data: {
+                         username:username,
+                         password:password,
+                         rememberMe:false,
+                         action:action_l
+                     },*/
+                    success: function (data) {
+                        alert("code:" + data.code + "|" + "message" + data.message);
+                    },
+                    error: function (data) {
+                        alert("unknown error");
+                        return false;
+                    }
+
+                });
+            });
+
+
+            $("a.actuator").click(function () {
+                window.location.href = path + 'actuator';
+            });
+            $("a.swagger").click(function () {
+                window.location.href = path + 'swagger-ui.html';
+            });
+            $("a.thymeleaf").click(function () {
+                window.location.href = path + 'users/index';
+            });
+        </script>
     </body>
 </html>
-<script>
-
-    $("a.logout").click(function () {
-        //获取当前网址，如： http://localhost:8083/myproj/view/my.jsp
-
-
-        $.ajax({
-            type: 'post',
-            //url: 'develop_user/user.do',
-            url: path + 'logout',
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            /* data: {
-                 username:username,
-                 password:password,
-                 rememberMe:false,
-                 action:action_l
-             },*/
-            success: function (data) {
-                if (data.code === 1) {
-                    //window.location.href = realPath + '/';
-                    //alert("ok");
-                } else {
-                    alert(data.message);
-                }
-            },
-            error: function (data) {
-                alert("unknown error");
-                return false;
-            }
-
-        });
-    });
-
-    $("a.get").click(function () {
-        //获取当前网址，如： http://localhost:8083/myproj/view/my.jsp
-
-
-        $.ajax({
-            type: 'get',
-            //url: 'develop_user/user.do',
-            url: path + 'develop_user/users',
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            /* data: {
-                 username:username,
-                 password:password,
-                 rememberMe:false,sssssss
-                 action:action_l
-             },*/
-            success: function (data) {
-                //alert("code:"+data.code+"|"+"message"+data.message);
-            },
-            error: function (data) {
-                alert("unknown error");
-                return false;
-            }
-
-        });
-    });
-    $("a.query").click(function () {
-        //获取当前网址，如： http://localhost:8083/myproj/view/my.jsp
-
-
-        $.ajax({
-            type: 'post',
-            //url: 'develop_user/user.do',
-            url: path + 'develop_user/users',
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            /* data: {
-                 username:username,
-                 password:password,
-                 rememberMe:false,
-                 action:action_l
-             },*/
-            success: function (data) {
-                alert("code:" + data.code + "|" + "message" + data.message);
-            },
-            error: function (data) {
-                alert("unknown error");
-                return false;
-            }
-
-        });
-    });
-
-
-    $("a.actuator").click(function () {
-        window.location.href = path + 'actuator';
-    });
-    $("a.swagger").click(function () {
-        window.location.href = path + 'swagger-ui.html';
-    });
-    $("a.thymeleaf").click(function () {
-        window.location.href = path + 'users/index';
-    });
-</script>

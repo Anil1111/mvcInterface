@@ -23,7 +23,6 @@ import java.util.Map;
  * @author : Rubi
  * @version : 2018-10-10 10:27
  */
-@SuppressWarnings("all")
 public interface Suger {
     default boolean isAjax(HttpServletRequest request) {
         String header = request.getHeader("X-Requested-With");
@@ -39,11 +38,12 @@ public interface Suger {
      *
      * @return map
      */
-    default Map getHeaderMap(HttpServletRequest request) {
-        Enumeration headerNames = request.getHeaderNames();
-        Map headerMap = Maps.newHashMap();
+
+    default Map<String,String> getHeaderMap(HttpServletRequest request) {
+        Enumeration<String> headerNames = request.getHeaderNames();
+        Map<String,String> headerMap = Maps.newHashMap();
         while (headerNames.hasMoreElements()) {
-            String headerName = (String) headerNames.nextElement();
+            String headerName = headerNames.nextElement();
             String headerValue = request.getHeader(headerName);
             headerMap.put(headerName, headerValue);
         }
@@ -151,8 +151,8 @@ public interface Suger {
     }
     /**
      *  使用	response 输出JSON
-     * @param hresponse
-     * @param resultMap
+     * @param response
+     * @param result
      * @throws IOException
      */
     default  void sendResult(ServletResponse response, Result result) throws IOException {

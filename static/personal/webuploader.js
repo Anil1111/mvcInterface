@@ -1659,7 +1659,6 @@
             this.name = file.name || ('untitled' + uid++);
             ext = rExt.exec( file.name ) ? RegExp.$1.toLowerCase() : '';
     
-            // todo 支持其他类型文件的转换。
             // 如果有 mimetype, 但是文件名里面没有找出后缀规律
             if ( !ext && file.type ) {
                 ext = /\/(jpg|jpeg|png|gif|bmp)$/i.exec( file.type ) ?
@@ -4532,7 +4531,6 @@
             };
     
             me.destroy = function() {
-                // @todo 删除池子中的所有实例
                 return destroy && destroy.apply( this, arguments );
             };
         }
@@ -4900,7 +4898,6 @@
                     input.attr( 'multiple', 'multiple' );
                 }
     
-                // @todo Firefox不支持单独指定后缀
                 if ( opts.accept && opts.accept.length > 0 ) {
                     arr = [];
     
@@ -6379,7 +6376,6 @@
     
                 s = s || 1;
     
-                // todo 解决 orientation 的问题。
                 // values that require 90 degree rotation
                 // if ( ~[ 5, 6, 7, 8 ].indexOf( orientation ) ) {
     
@@ -6735,7 +6731,6 @@
     });
     /**
      * @fileOverview Transport
-     * @todo 支持chunked传输，优势：
      * 可以将大文件分成小块，挨个传输，可以提高大文件成功率，当失败的时候，也只需要重传那小部分，
      * 而不需要重头再传一次。另外断点续传也需要用chunked方式。
      */
@@ -7383,7 +7378,6 @@
          * @return {SparkMD5.ArrayBuffer} The instance itself
          */
         SparkMD5.ArrayBuffer.prototype.append = function (arr) {
-            // TODO: we could avoid the concatenation here but the algorithm would be more complex
             //       if you find yourself needing extra performance, please make a PR.
             var buff = this._concatArrayBuffer(this._buff, arr),
                 length = buff.length,
@@ -7639,7 +7633,6 @@
             this.jsreciver = jsreciver;
     
             this.destroy = function() {
-                // @todo 删除池子中的所有实例
                 return destroy && destroy.apply( this, arguments );
             };
     
@@ -7650,7 +7643,6 @@
                 return flash.exec( this.uid, comp, fn, args );
             };
     
-            // @todo
         }
     
         Base.inherits( Runtime, {
@@ -7705,7 +7697,6 @@
         FlashRuntime.register = function( name, component ) {
             component = components[ name ] = Base.inherits( CompBase, $.extend({
     
-                // @todo fix this later
                 flashExec: function() {
                     var owner = this.owner,
                         runtime = this.getRuntime();

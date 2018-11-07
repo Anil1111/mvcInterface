@@ -3,14 +3,13 @@ package com.nine.intface.testing.service;
 
 import com.nine.intface.common.service.IBaseService;
 import com.nine.intface.testing.po.Url;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.MultiValueMap;
-
-import java.util.Map;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author Rubi
@@ -19,7 +18,9 @@ import java.util.Map;
 @Transactional(rollbackFor = Exception.class)
 public interface IUrlService extends IBaseService<Url> {
 
-    <T> T doHanle(String scheme,String method, String host, Integer port, String path,
-                  String file, String params, String headers,
-                  String bodys,Class<T> clazz)throws Exception;
+    <T> ResponseEntity<T> doHanle(String scheme, String method, String host,
+                                  Integer port, String path, String file, String params,
+                                  String headers, String bodys, MultipartFile[] uploadFiles, String[] fileNames,
+                                  Class<T> jsonObjectClass)throws Exception;
+
 }

@@ -30,7 +30,8 @@ public class FileController {
         return "my/upload";
     }
     @PostMapping("/upload")
-    public String fileUpload(@RequestParam MultipartFile file,Model model) throws Exception {
+    @ResponseBody
+    public Result fileUpload(@RequestParam MultipartFile file,Model model) throws Exception {
         Result result;
         log.info("{}-->{}",file.getOriginalFilename(),file.getSize());
         File dest = new File(UPLOAD_FOLDER  + file.getOriginalFilename());
@@ -39,8 +40,7 @@ public class FileController {
         }
         file.transferTo(dest); //保存文件
         result = ResultFactory.getOKRestResult();
-        model.addAttribute("result",result);
-        return "redirect:/files/index";
+        return result;
     }
 }
 

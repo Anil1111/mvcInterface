@@ -6,8 +6,14 @@ import com.nine.intface.common.service.ISysLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.core.annotation.Order;
+import sun.net.www.content.image.gif;
+import sun.net.www.content.image.jpeg;
+import sun.net.www.content.image.png;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.URLDecoder;
@@ -20,15 +26,17 @@ import java.util.Map;
  * @version : 2018-11-01 17:03 下午
  */
 @Slf4j
+@WebFilter(filterName="logFilter",urlPatterns= {"/*"})
+@Order(FilterRegistrationBean.HIGHEST_PRECEDENCE)
 public class LogFilter implements Filter, Suger {
 
-    private String[] excludeUrls;
+    private String[] excludeUrls={".js",".css",".jpg",".jpeg",".png",".gif"};
     @Autowired
     private ISysLogService sysLogService;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        excludeUrls = filterConfig.getInitParameter(URLConstant.SUFFIXPATTONS).split(",");
+       // excludeUrls = filterConfig.getInitParameter(URLConstant.SUFFIXPATTONS).split(",");
     }
 
     @Override
