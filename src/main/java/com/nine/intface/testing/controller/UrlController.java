@@ -46,11 +46,7 @@ public class UrlController {
                            @RequestParam(required = false, defaultValue = "{}") String bodys,
                            @RequestParam(required = false) MultipartFile[] uploadFiles, @RequestParam(required = false) String[] fileNames) throws Exception {
         ResponseEntity<String> response =
-                urlService.doHanle(scheme, method,
-                        host, port,
-                        path, file,
-                        params, headers,
-                        bodys, uploadFiles, fileNames, String.class);
+                urlService.doHanle(scheme, method, host, port, path, file, params, headers, bodys, uploadFiles, fileNames, String.class);
         Object body;
         try {
             body = response.hasBody() ? JSON.parseObject(response.getBody()) : new JSONObject();
