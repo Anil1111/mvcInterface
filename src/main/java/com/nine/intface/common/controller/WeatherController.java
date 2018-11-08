@@ -40,31 +40,31 @@ public class WeatherController implements Suger {
 
     @Autowired
     private IAsyncTaskService asyncTaskService;
-
-    @ApiOperation(httpMethod = "POST", value = "根据城市名查询天气信息", tags = {"测试用接口"})
-    @ApiImplicitParam(name = "city", value = "城市", dataType = "String", paramType = "query", example = "湖州")
-    @PostMapping("/weather")
-    @ResponseBody
-    public Result getWeatherInfo(@RequestParam String city) throws Exception {
-        //get 用hashmap 填充,相当于  obj..)    post必须使用 LinkMultiValueMap
-        Map<String, Object> map = Maps.newHashMap();
-        map.put("city", city);
-        return ResultFactory.getOKRestResult(getSimple(URLConstant.ETOUCH_WEATHER, map, restTemplate));
-    }
-
-    @ApiOperation(httpMethod = "POST", value = "根据ip查询地址信息", tags = {"测试用接口"})
-    @ApiImplicitParam(name = "ip", value = "城市", dataType = "String", paramType = "query", example = "117.148.92.108")
-    @PostMapping("/ip")
-    public Result getIpAdressInfo(@RequestParam String ip) throws Exception {
-        Map<String, Object> map = Maps.newHashMap();
-        map.put("ip", ip);
-        return ResultFactory.getOKRestResult(getSimple(URLConstant.TAOBAO_IP, map, restTemplate));
-    }
-
-    @GetMapping("/hello")
-    public Result hello(){
-        return ResultFactory.getOKRestResult();
-    }
+//
+//    @ApiOperation(httpMethod = "POST", value = "根据城市名查询天气信息", tags = {"测试用接口"})
+//    @ApiImplicitParam(name = "city", value = "城市", dataType = "String", paramType = "query", example = "湖州")
+//    @PostMapping("/weather")
+//    @ResponseBody
+//    public Result getWeatherInfo(@RequestParam String city) throws Exception {
+//        //get 用hashmap 填充,相当于  obj..)    post必须使用 LinkMultiValueMap
+//        Map<String, Object> map = Maps.newHashMap();
+//        map.put("city", city);
+//        return ResultFactory.getOKRestResult(getSimple(URLConstant.ETOUCH_WEATHER, map, restTemplate));
+//    }
+//
+//    @ApiOperation(httpMethod = "POST", value = "根据ip查询地址信息", tags = {"测试用接口"})
+//    @ApiImplicitParam(name = "ip", value = "城市", dataType = "String", paramType = "query", example = "117.148.92.108")
+//    @PostMapping("/ip")
+//    public Result getIpAdressInfo(@RequestParam String ip) throws Exception {
+//        Map<String, Object> map = Maps.newHashMap();
+//        map.put("ip", ip);
+//        return ResultFactory.getOKRestResult(getSimple(URLConstant.TAOBAO_IP, map, restTemplate));
+//    }
+//
+//    @GetMapping("/hello")
+//    public Result hello(){
+//        return ResultFactory.getOKRestResult();
+//    }
 
 
 

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
@@ -172,15 +173,25 @@ public interface Suger {
         }
     }
 
-    default Map<String,Object> getSimple(String url ,Map<String,Object> paramMap,RestTemplate template){
-        StringBuffer sbUrl = new StringBuffer(url);
-        sbUrl.append("?");
-        for (String paramName : paramMap.keySet()) {
-            sbUrl.append(paramName).append("=").append(paramMap.get(paramName)).append("&");
+
+
+    /**
+     * 获取利用反射获取类里面的值和名称
+     *
+     * @param obj
+     * @return
+     * @throws IllegalAccessException
+     */
+    default Map<String, Object> objectToMap(Object obj) throws IllegalAccessException {
+        Map<String, Object> map = new HashMap<>();
+        Class<?> clazz = obj.getClass();
+        System.out.println(clazz);
+        for (Field field : clazz.getDeclaredFields()) {
+            field.setAccessible(true);
+            String fieldName = field.getName();
+            Object value = field.get(obj);
+            map.put(fieldName, value);
         }
-        sbUrl.deleteCharAt(sbUrl.length() - 1);
-        String json = template.getForObject(sbUrl.toString(),String.class);
-        Map<String,Object> object = JSON.parseObject(json,Map.class);
-        return object;
+        return map;
     }
 }
