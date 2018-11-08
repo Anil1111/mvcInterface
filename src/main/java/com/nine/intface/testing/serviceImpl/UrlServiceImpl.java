@@ -100,7 +100,6 @@ public class UrlServiceImpl extends BaseServiceImpl<UrlMapper, Url> implements I
         path = StringUtils.isEmpty(path) ? Strings.EMPTY : "/" + path;
         file = StringUtils.isEmpty(file) ? Strings.EMPTY : file;
         port = port != null && port <= 0 ? 80 : port;
-
         StringBuffer url = new StringBuffer();
         url.append(scheme).append("://")
                 .append(host).append(":").append(port).append(path).append("/").append(file).append("?");
@@ -129,7 +128,6 @@ public class UrlServiceImpl extends BaseServiceImpl<UrlMapper, Url> implements I
         for (File temp : temps) {
             temp.delete();
         }
-
         return response;
     }
 
