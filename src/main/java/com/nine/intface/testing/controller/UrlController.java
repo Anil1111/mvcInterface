@@ -4,6 +4,7 @@ package com.nine.intface.testing.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Maps;
 import com.nine.intface.testing.service.IUrlService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
@@ -53,7 +54,7 @@ public class UrlController {
         } catch (JSONException e) {
             body = response.hasBody() ? response.getBody() : Strings.EMPTY;
         }
-        Map<String, Object> map = new HashMap<>(3);
+        Map<String, Object> map = Maps.newHashMapWithExpectedSize(3);
         map.put("body", body);
         map.put("header", response.getHeaders());
         map.put("statusCode", response.getStatusCodeValue());

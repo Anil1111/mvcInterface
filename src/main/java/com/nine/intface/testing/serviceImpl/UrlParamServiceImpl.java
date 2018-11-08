@@ -2,6 +2,7 @@ package com.nine.intface.testing.serviceImpl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.google.common.collect.Lists;
 import com.nine.intface.common.serviceImpl.BaseServiceImpl;
 import com.nine.intface.testing.dao.UrlParamMapper;
 import com.nine.intface.testing.po.UrlParam;
@@ -28,6 +29,6 @@ public class UrlParamServiceImpl extends BaseServiceImpl<UrlParamMapper, UrlPara
         if(!CollectionUtils.isEmpty(list)){
             return list;
         }
-        return new ArrayList<>();
+        return Lists.newArrayList();
     }
 }
