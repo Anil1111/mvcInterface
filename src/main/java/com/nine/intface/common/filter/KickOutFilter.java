@@ -1,6 +1,6 @@
 package com.nine.intface.common.filter;
 
-import com.nine.intface.common.controller.Suger;
+import com.nine.intface.common.controller.Sugar;
 import com.nine.intface.common.po.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,7 +26,7 @@ import java.util.LinkedList;
  */
 @Getter
 @Setter
-public class KickOutFilter extends AccessControlFilter implements Suger {
+public class KickOutFilter extends AccessControlFilter implements Sugar {
     private boolean kickoutAfter = false; //踢出之前登录的/之后登录的用户 默认踢出之前登录的用户
     private int maxSession = 1; //同一个帐号最大会话数 默认1
 

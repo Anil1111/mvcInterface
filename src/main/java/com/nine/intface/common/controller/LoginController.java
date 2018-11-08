@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 @Api(value = "/", tags = {"登入登出"})
 @RestController
-public class LoginController implements Suger {
+public class LoginController implements Sugar {
 
 
     @Autowired

@@ -1,7 +1,7 @@
 package com.nine.intface.common.filter;
 
 import com.nine.intface.common.constants.Constant;
-import com.nine.intface.common.controller.Suger;
+import com.nine.intface.common.controller.Sugar;
 import com.nine.intface.common.service.ISysLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.web.filter.authz.RolesAuthorizationFilter;
@@ -20,7 +20,7 @@ import java.io.IOException;
  * @version : 2018-10-07 20:04 下午
  */
 @Slf4j
-public class RubiRoleFilter extends RolesAuthorizationFilter implements Suger {
+public class RubiRoleFilter extends RolesAuthorizationFilter implements Sugar {
 
     private ISysLogService sysLogService;
 

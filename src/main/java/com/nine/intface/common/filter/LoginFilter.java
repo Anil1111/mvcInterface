@@ -1,7 +1,7 @@
 package com.nine.intface.common.filter;//package com.noob.filter;
 
 import com.nine.intface.common.constants.URLConstant;
-import com.nine.intface.common.controller.Suger;
+import com.nine.intface.common.controller.Sugar;
 import com.nine.intface.common.po.User;
 import com.nine.intface.common.vo.ResultFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -10,8 +10,6 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.util.WebUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -25,7 +23,7 @@ import java.io.IOException;
  * @Date 2017年9月18日 下午4:48:03
  */
 @Slf4j
-public class LoginFilter extends FormAuthenticationFilter implements Suger {
+public class LoginFilter extends FormAuthenticationFilter implements Sugar {
 
     // session获取
     //CustomShiroSessionDAO customShiroSessionDAO;

@@ -24,7 +24,7 @@ import java.util.Map;
  * @author : Rubi
  * @version : 2018-10-10 10:27
  */
-public interface Suger {
+public interface Sugar {
     default boolean isAjax(HttpServletRequest request) {
         String header = request.getHeader("X-Requested-With");
         if ("XMLHttpRequest".equalsIgnoreCase(header)) {

@@ -1,22 +1,13 @@
 package com.nine.intface.common.controller;
 
-import com.google.common.collect.Maps;
-import com.nine.intface.common.constants.URLConstant;
 import com.nine.intface.common.service.IUserService;
 import com.nine.intface.common.tasks.IAsyncTaskService;
-import com.nine.intface.common.vo.Result;
-import com.nine.intface.common.vo.ResultFactory;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 
 /**
@@ -27,7 +18,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/test")
 @SuppressWarnings("all")
-public class WeatherController implements Suger {
+public class WeatherController implements Sugar {
 
     @Autowired
     private RestTemplate restTemplate;

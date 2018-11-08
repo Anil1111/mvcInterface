@@ -1,16 +1,12 @@
 package com.nine.intface.common.filter;
 
-import com.nine.intface.common.constants.URLConstant;
-import com.nine.intface.common.controller.Suger;
+import com.nine.intface.common.controller.Sugar;
 import com.nine.intface.common.service.ISysLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.core.annotation.Order;
-import sun.net.www.content.image.gif;
-import sun.net.www.content.image.jpeg;
-import sun.net.www.content.image.png;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -28,7 +24,7 @@ import java.util.Map;
 @Slf4j
 @WebFilter(filterName="logFilter",urlPatterns= {"/*"})
 @Order(FilterRegistrationBean.HIGHEST_PRECEDENCE)
-public class LogFilter implements Filter, Suger {
+public class LogFilter implements Filter, Sugar {
 
     private String[] excludeUrls={".js",".css",".jpg",".jpeg",".png",".gif"};
     @Autowired

@@ -1,6 +1,6 @@
 package com.nine.intface.common.serviceImpl;
 
-import com.nine.intface.common.controller.Suger;
+import com.nine.intface.common.controller.Sugar;
 import com.nine.intface.common.dao.SysLogMapper;
 import com.nine.intface.common.po.SysLog;
 import com.nine.intface.common.service.ISysLogService;
@@ -20,7 +20,7 @@ import java.util.Map;
  */
 @Slf4j
 @Service
-public class SysLogServiceImpl extends BaseServiceImpl<SysLogMapper, SysLog> implements ISysLogService, Suger {
+public class SysLogServiceImpl extends BaseServiceImpl<SysLogMapper, SysLog> implements ISysLogService, Sugar {
 
     @Override
     public void recordOne(String ip, String operateBy, String operateUrl, String remark, Date createTime)  {

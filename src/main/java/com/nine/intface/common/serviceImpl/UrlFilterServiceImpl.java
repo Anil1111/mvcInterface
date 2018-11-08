@@ -23,25 +23,25 @@ import java.util.List;
  */
 @Service
 public class UrlFilterServiceImpl extends BaseServiceImpl<UrlFilterMapper, UrlFilter> implements IUrlFilterService {
-	 @Override
+    @Override
     public List<UrlFilter> getAllUrlFilter() throws Exception {
-        List<UrlFilter> list=list(new QueryWrapper<UrlFilter>().eq("disable_flag",1));
+        List<UrlFilter> list = list(new QueryWrapper<UrlFilter>().eq("disable_flag", 1));
 //        Collections.sort(list, (UrlFilter o1,UrlFilter o2)->{
 //            int superResult = o1.getParentSort().compareTo(o2.getParentSort());
 //            int subResult = o1.getSubSort().compareTo(o2.getSubSort());
 //            return superResult != 0 ? superResult : subResult;
 //        });
-         Ordering<UrlFilter> ordering =Ordering
-                 .from(Comparator.comparing(UrlFilter::getParentSort))
-                 .compound(Comparator.comparing(UrlFilter::getSubSort));
-         Collections.sort(list,ordering);
+        Ordering<UrlFilter> ordering = Ordering
+                .from(Comparator.comparing(UrlFilter::getParentSort))
+                .compound(Comparator.comparing(UrlFilter::getSubSort));
+        Collections.sort(list, ordering);
         return list;
     }
 
 }
 
 /**
- *  int superResult = parentSort.compareTo(o.getParentSort());
- *         int subResult = subSort.compareTo(o.getSubSort());
- *         return superResult != 0 ? superResult : subResult;
+ * int superResult = parentSort.compareTo(o.getParentSort());
+ * int subResult = subSort.compareTo(o.getSubSort());
+ * return superResult != 0 ? superResult : subResult;
  */

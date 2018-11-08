@@ -2,11 +2,8 @@ package com.nine.intface.common.filter;
 
 
 import com.nine.intface.common.constants.Constant;
-import com.nine.intface.common.controller.Suger;
+import com.nine.intface.common.controller.Sugar;
 import org.apache.shiro.web.filter.authc.UserFilter;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author : Rubi
  * @version : 2018-10-07 23:53 下午
  */
-public class RubiUserFilter extends UserFilter implements Suger {
+public class RubiUserFilter extends UserFilter implements Sugar {
 
     /**
      * isAccessAllowed：表示是否允许访问；
